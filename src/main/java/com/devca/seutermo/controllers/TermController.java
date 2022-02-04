@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.devca.seutermo.services.TermService;
 
 @Controller
-@RequestMapping(value = "/terms")
+@RequestMapping(value = "/")
 public class TermController {
 	
 	@Autowired
 	private TermService service;
 
 	@GetMapping
-	public String terms(Model model) {
-		model.addAttribute("termList", service.findAll());
+	public String terms() {
+		//model.addAttribute("termList", service.findAll());
 		return "terms";
 	}
 
