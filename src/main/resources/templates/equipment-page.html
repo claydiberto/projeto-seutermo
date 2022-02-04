@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipments</title>
+</head>
+
+<body>
+    
+
+    <h1>Equipamento</h1>
+
+    <br />
+
+
+
+    <div>
+
+        <form th:action="@{/saveEquipment}" th:object="${equipment}" method="post">
+
+
+            <input type="hidden" th:field="*{id}" />
+
+            <div>
+                <label for="dropEquipmentType" class="form-label">Tipo de equipamento</label>
+                <select name="dropEquipmentType" class="form-control" th:field=*{equipmentType}>
+                    <option th:each="typeOpt : ${T(com.devca.seutermo.entities.enums.EquipmentType).values()}"
+                        th:value="${typeOpt}" th:text="${typeOpt}"></option>
+                </select>
+            </div>
+            <div>
+                <label for="fabricator" class="form-label">Fabricante</label>
+                <input type="text" class="form-control" th:field=*{fabricator} name="fabricator" />
+            </div>
+            <div>
+                <label for="model" class="form-label">Modelo</label>
+                <input type="text" class="form-control" th:field=*{model} name="model" />
+            </div>
+            <div>
+                <label for="serialNumber" class="form-label">Serial Number</label>
+                <input type="text" class="form-control" th:field=*{serialNumber} name="serialNumber" />
+            </div>
+            <div>
+                <label for="dropEquipmentStatus" class="form-label">Tipo de equipamento</label>
+                <select name="dropEquipmentStatus" class="form-control" th:field=*{equipmentStatus}>
+                    <option th:each="statusOpt : ${T(com.devca.seutermo.entities.enums.EquipmentStatus).values()}"
+                        th:value="${statusOpt}" th:text="${statusOpt}"></option>
+                </select>
+            </div>
+
+            <a th:href="@{/equipments}">Cancelar</a>
+            <button type="submit" class="btn btn-success">Salvar</button>
+        </form>
+
+
+    </div>
+
+</body>
+
+</html>

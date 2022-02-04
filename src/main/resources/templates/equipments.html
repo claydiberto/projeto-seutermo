@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Equipments</title>
+</head>
+
+<body>
+
+	<h1>Hello to equipment page</h1>
+
+	<br />
+
+	<a th:href="@{/}">Home</a>
+	
+	<br />
+
+	<a th:href="@{/equipment}">Adicionar Equipamento</a>
+
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<td>Tipo de equipamento</td>
+					<td>Fabricante</td>
+					<td>Modelo</td>
+					<td>Serial Number</td>
+					<td>Status</td>
+					<td>Action</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="equipment: ${equipmentList}">
+					<th th:text="${equipment.id}"></th>
+					<td th:text="${equipment.equipmentType}"></td>
+					<td th:text="${equipment.fabricator}"></td>
+					<td th:text="${equipment.model}"></td>
+					<td th:text="${equipment.serialNumber}"></td>
+					<td th:text="${equipment.equipmentStatus}"></td>
+					<td>
+						<a th:href="@{/equipment/{id}(id=${equipment.id})}" class="btn btn-success">UPDATE</a>
+						
+						<form th:action="@{/deleteEquipment/{id}(id=${equipment.id})}" method="get">
+							<button type="submit" class="btn btn-danger">Deletar</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+
+</html>
