@@ -14,7 +14,7 @@
 	<br />
 
 	<a th:href="@{/}">Home</a>
-	
+
 	<br />
 
 	<a th:href="@{/equipment}">Adicionar Equipamento</a>
@@ -42,15 +42,33 @@
 					<td th:text="${equipment.equipmentStatus}"></td>
 					<td>
 						<a th:href="@{/equipment/{id}(id=${equipment.id})}" class="btn btn-success">UPDATE</a>
-						
-						<form th:action="@{/deleteEquipment/{id}(id=${equipment.id})}" method="get">
-							<button type="submit" class="btn btn-danger">Deletar</button>
-						</form>
+
+						<button onclick="deleteConfirm()">Click me</button>
+
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+
+	<script>
+		function deleteConfirm() {
+			let text = "Tem certeza de que deseja remover?\nEither OK or Cancel.";
+			if (confirm(text) == true) {
+				text = "You ok!";
+				deleteAction();
+			} else {
+				text = "You canceled!";
+			}
+			document.getElementById("demo").innerHTML = text;
+		}
+		
+		function deleteAction() {
+				<form th:action="@{/deleteEquipment/{id}(id=${equipment.id})}" method="get"></form>
+			
+		}
+		
+	</script>
 
 </body>
 

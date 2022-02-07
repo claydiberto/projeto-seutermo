@@ -4,62 +4,76 @@
 <head>
     <title>Equipments</title>
     <div th:replace="fragments :: header"></div>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
 <body>
 
+    <div th:replace="fragments :: navbar"></div>
+
     <div class="container">
-    
-    
 
-<div class="d-flex justify-content-center">
-        <h1>Equipamento</h1>
-</div>
-        
-        <div class="d-flex justify-content-center">
-        <form th:action="@{/saveEquipment}" th:object="${equipment}" method="post" class="col-10 col-md-8 col-lg-6 col-xl-6">
-
-            <input type="hidden" th:field="*{id}" />
-
-            <div>
-                <label for="dropEquipmentType" class="form-label">Tipo de equipamento</label>
-                <select name="dropEquipmentType" class="form-control" th:field=*{equipmentType}>
-                    <option th:each="typeOpt : ${T(com.devca.seutermo.entities.enums.EquipmentType).values()}"
-                        th:value="${typeOpt}" th:text="${typeOpt}"></option>
-                </select>
-            </div>
-
-            <div>
-                <label for="fabricator" class="form-label">Fabricante</label>
-                <input type="text" class="form-control" th:field=*{fabricator} name="fabricator" />
-            </div>
-
-            <div>
-                <label for="model" class="form-label">Modelo</label>
-                <input type="text" class="form-control" th:field=*{model} name="model" />
-            </div>
-
-            <div>
-                <label for="serialNumber" class="form-label">Serial Number</label>
-                <input type="text" class="form-control" th:field=*{serialNumber} name="serialNumber" />
-            </div>
-
-            <div>
-                <label for="dropEquipmentStatus" class="form-label">Tipo de equipamento</label>
-                <select name="dropEquipmentStatus" class="form-control" th:field=*{equipmentStatus}>
-                    <option th:each="statusOpt : ${T(com.devca.seutermo.entities.enums.EquipmentStatus).values()}"
-                        th:value="${statusOpt}" th:text="${statusOpt}"></option>
-                </select>
-            </div>
-
-            <div>
-                <a class="btn btn-secondary" th:href="@{/equipments}">Cancelar</a>
-                <button type="submit" class="btn btn-success">Salvar</button>
-            </div>
-
-        </form>
+        <div class="d-flex justify-content-center pt-5 pb-3 mt-3">
+            <h1>Equipamento</h1>
         </div>
+
+        <div class="row justify-content-center mt-3">
+
+            <form th:action="@{/saveEquipment}" th:object="${equipment}" method="post"
+                class="col-10 col-md-8 col-lg-6 col-xl-6">
+
+                <input type="hidden" th:field="*{id}" />
+
+                <div class="mb-3">
+                    <label for="dropEquipmentType" class="form-label">Tipo</label>
+                    <select name="dropEquipmentType" class="form-control" th:field=*{equipmentType}>
+                        <option th:each="typeOpt : ${T(com.devca.seutermo.entities.enums.EquipmentType).values()}"
+                            th:value="${typeOpt}" th:text="${typeOpt}"></option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="fabricator" class="form-label">Fabricante</label>
+                    <input type="text" class="form-control" th:field=*{fabricator} name="fabricator" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="model" class="form-label">Modelo</label>
+                    <input type="text" class="form-control" th:field=*{model} name="model" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="serialNumber" class="form-label">Serial Number</label>
+                    <input type="text" class="form-control" th:field=*{serialNumber} name="serialNumber" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="dropEquipmentStatus" class="form-label">Status</label>
+                    <select name="dropEquipmentStatus" class="form-control" th:field=*{equipmentStatus}>
+                        <option th:each="statusOpt : ${T(com.devca.seutermo.entities.enums.EquipmentStatus).values()}"
+                            th:value="${statusOpt}" th:text="${statusOpt}"></option>
+                    </select>
+                </div>
+
+                <div class="mb-3 row justify-content-between">
+                    <div class="col-auto">
+                        <a class="btn btn-secondary" th:href="@{/equipments}">Cancelar</a>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-success">Salvar</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
+
+    <div th:replace="fragments :: footer"></div>
+
 </body>
 
 </html>
