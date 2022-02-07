@@ -6,12 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.devca.seutermo.entities.Analyst;
-import com.devca.seutermo.entities.Employee;
 import com.devca.seutermo.entities.Equipment;
 import com.devca.seutermo.entities.Term;
 import com.devca.seutermo.entities.enums.EquipmentType;
 import com.devca.seutermo.repositories.AnalystRepository;
-import com.devca.seutermo.repositories.EmployeeRepository;
 import com.devca.seutermo.repositories.TermRepository;
 import com.devca.seutermo.services.EquipmentService;
 
@@ -26,9 +24,6 @@ public class SeutermoApplication implements CommandLineRunner {
 	
 	@Autowired
 	private AnalystRepository analystRepository;
-	
-	@Autowired
-	private EmployeeRepository employeeRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SeutermoApplication.class, args);
@@ -61,14 +56,6 @@ public class SeutermoApplication implements CommandLineRunner {
 		t.getListOfEquipments().add(e2);
 		t.setAnalyst(a1);
 		termRepository.save(t);
-		
-		
-		Employee c1 = new Employee();
-		c1.setId(1L);
-		c1.setName("JORGE");
-		c1.setEmail("JORGE@FTS.COM.BR");
-		c1.setCpf("546231561");
-		employeeRepository.save(c1);
 		
 //		List<Term> listEq = termRepository.findEquipmentHasTerm();
 //		

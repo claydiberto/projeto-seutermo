@@ -2,7 +2,7 @@
 <html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
 
 <head>
-    <title>Equipment</title>
+    <title>Terms</title>
     <div th:replace="fragments :: header"></div>
 </head>
 
@@ -13,12 +13,12 @@
     <div class="container">
 
         <div class="d-flex justify-content-center pt-5 pb-3 mt-3">
-            <h1>Equipamento</h1>
+            <h1>Termo</h1>
         </div>
 
         <div class="row justify-content-center mt-3">
 
-            <form th:action="@{/saveEquipment}" th:object="${equipment}" method="post"
+            <form th:action="@{/saveTerm}" th:object="${term}" method="post"
                 class="col-10 col-md-8 col-lg-6 col-xl-6">
 
                 <input type="hidden" th:field="*{id}" />

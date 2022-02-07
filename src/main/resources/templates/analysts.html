@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Equipments</title>
+	<title>Analyst</title>
 	<div th:replace="fragments :: header"></div>
 </head>
 
@@ -12,31 +12,32 @@
 	<div th:replace="fragments :: navbar"></div>
 
 	<div class="container">
+
 		<div class="d-flex justify-content-center pt-5 pb-3 mt-3">
-			<h1>LISTA DE TERMOS</h1>
+			<h1>LISTA DE ANALISTAS</h1>
 		</div>
 
-		<a th:href="@{/term}" class="btn btn-primary">Adicionar Termo</a>
+		<a th:href="@{/analyst}" class="btn btn-primary">Adicionar Analista</a>
 
 		<div class="row justify-content-center mt-3 table-responsive-md">
 			<table class="table table-hover">
 				<thead class="table-light">
 					<tr>
 						<th>ID</th>
-						<td>Analista</td>
-						<td>Colaborador</td>
-						<td>Equipamento</td>
+						<td>Nome</td>
+						<td>Email</td>
+						<td>Localidade</td>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="term: ${termList}">
-						<th th:text="${term.id}"></th>
-						<td th:text="${term.analyst.getName}"></td>
-						<td th:text="${term.employee}"></td>
-						<td th:text="${term.listOfEquipments}"></td>
+					<tr th:each="analyst: ${analystList}">
+						<th th:text="${analyst.id}"></th>
+						<td th:text="${analyst.name}"></td>
+						<td th:text="${analyst.email}"></td>
+						<td th:text="${analyst.locality}"></td>
 						<td>
-							<a th:href="@{/term/{id}(id=${term.id})}" class="btn btn-success">UPDATE</a>
-							<a th:href="@{/deleteTerm/{id}(id=${term.id})}" class="btn btn-danger">DELETE</button>
+							<a th:href="@{/analyst/{id}(id=${analyst.id})}" class="btn btn-success">UPDATE</a>
+							<a th:href="@{/deleteAnalyst/{id}(id=${analyst.id})}" class="btn btn-danger">DELETE</button>
 						</td>
 					</tr>
 				</tbody>
@@ -46,7 +47,6 @@
 		</div>
 
 	</div>
-
 </body>
 
 </html>
