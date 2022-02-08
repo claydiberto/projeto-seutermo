@@ -18,45 +18,35 @@
 
         <div class="row justify-content-center mt-3">
 
-            <form th:action="@{/saveTerm}" th:object="${term}" method="post"
-                class="col-10 col-md-8 col-lg-6 col-xl-6">
+            <form th:action="@{/saveTerm}" th:object="${term}" method="post" class="col-10 col-md-8 col-lg-6 col-xl-6">
 
                 <input type="hidden" th:field="*{id}" />
 
                 <div class="mb-3">
-                    <label for="dropEquipmentType" class="form-label">Tipo</label>
-                    <select name="dropEquipmentType" class="form-control" th:field=*{equipmentType}>
-                        <option th:each="typeOpt : ${T(com.devca.seutermo.entities.enums.EquipmentType).values()}"
-                            th:value="${typeOpt}" th:text="${typeOpt}"></option>
+                    <label for="dropAnalysts" class="form-label">Analista</label>
+                    <select name="dropAnalysts" class="form-control" th:field=*{analyst}>
+                        <option value="ANALISTA 1">ANALISTA 1</option>
+                        <option value="ANALISTA 2">ANALISTA 2</option>
+                        <!-- <option th:each="analyst : ${}"
+                            th:value="${analyst}" th:text="${analyst}"></option>
+                       -->
                     </select>
                 </div>
 
                 <div class="mb-3">
-                    <label for="fabricator" class="form-label">Fabricante</label>
-                    <input type="text" class="form-control" th:field=*{fabricator} name="fabricator" />
-                </div>
-
-                <div class="mb-3">
-                    <label for="model" class="form-label">Modelo</label>
-                    <input type="text" class="form-control" th:field=*{model} name="model" />
-                </div>
-
-                <div class="mb-3">
-                    <label for="serialNumber" class="form-label">Serial Number</label>
-                    <input type="text" class="form-control" th:field=*{serialNumber} name="serialNumber" />
-                </div>
-
-                <div class="mb-3">
-                    <label for="dropEquipmentStatus" class="form-label">Status</label>
-                    <select name="dropEquipmentStatus" class="form-control" th:field=*{equipmentStatus}>
-                        <option th:each="statusOpt : ${T(com.devca.seutermo.entities.enums.EquipmentStatus).values()}"
-                            th:value="${statusOpt}" th:text="${statusOpt}"></option>
+                    <label for="dropEmployess" class="form-label">Colaborador</label>
+                    <select name="dropEmployess" class="form-control" th:field=*{employee}>
+                        <option value="COLABORADOR 1">COLABORADOR 1</option>
+                        <option value="COLABORADOR 2">COLABORADOR 2</option>
+                        <!-- <option th:each="analyst : ${}"
+                            th:value="${analyst}" th:text="${analyst}"></option>
+                       -->
                     </select>
                 </div>
 
                 <div class="mb-3 row justify-content-between">
                     <div class="col-auto">
-                        <a class="btn btn-secondary" th:href="@{/equipments}">Cancelar</a>
+                        <a class="btn btn-secondary" th:href="@{/terms}">Cancelar</a>
                     </div>
                     <div class="col-auto">
                         <button type="submit" class="btn btn-success">Salvar</button>

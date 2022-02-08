@@ -33,17 +33,20 @@
 
                 <div class="mb-3">
                     <label for="fabricator" class="form-label">Fabricante</label>
-                    <input type="text" class="form-control" th:field=*{fabricator} name="fabricator" />
+                    <input type="text" class="form-control" th:field=*{fabricator} name="fabricator" 
+                    oninput="this.value = this.value.toUpperCase()" />
                 </div>
 
                 <div class="mb-3">
                     <label for="model" class="form-label">Modelo</label>
-                    <input type="text" class="form-control" th:field=*{model} name="model" />
+                    <input type="text" class="form-control" th:field=*{model} name="model" 
+                    oninput="this.value = this.value.toUpperCase()" />
                 </div>
 
                 <div class="mb-3">
                     <label for="serialNumber" class="form-label">Serial Number</label>
-                    <input type="text" class="form-control" th:field=*{serialNumber} name="serialNumber" />
+                    <input type="text" class="form-control" th:field=*{serialNumber} name="serialNumber" 
+                    oninput="this.value = this.value.toUpperCase()" />
                 </div>
 
                 <div class="mb-3">

@@ -17,26 +17,36 @@ public class TermController {
 	@Autowired
 	private TermService service;
 
+//	@GetMapping("/terms")
+//	public String terms(Model model) {
+//		
+//		Stream<Analyst> map = analystRepository.findAll().stream();
+//		
+//		model.addAllAttributes("analysts", map);
+//		
+//		return "null";
+//	}
+	
 	@GetMapping("/terms")
-	public String terms(Model model) {
+	public String terms(Model model, Model analyst) {
 		model.addAttribute("termList", service.findAll());
 		return "terms";
 	}
 	
 	@GetMapping("/term")
-	public String saveEquipment(Model model) {
+	public String insert(Model model) {
 		model.addAttribute("term", service.getTerm());
 		return "term-page";
 	}
 
 	@GetMapping("/term/{id}")
-	public String saveEquipment(@PathVariable("id") Long id, Model model) {
+	public String update(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("term", service.findById(id));
 		return "term-page";
 	}
 	
 	@PostMapping("/saveTerm")
-	public String saveTerm(@ModelAttribute("term") Term term) {		
+	public String save(@ModelAttribute("term") Term term) {		
 		service.save(term);
 		return "redirect:/terms";
 	}

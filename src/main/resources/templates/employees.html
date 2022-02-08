@@ -36,8 +36,8 @@
 						<td th:text="${employee.email}"></td>
 						<td th:text="${employee.cpf}"></td>
 						<td>
-							<a th:href="@{/employee/{id}(id=${employee.id})}" class="btn btn-success">UPDATE</a>
-							<a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">DELETE</a>
+							<a th:href="@{/employee/{id}(id=${employee.id})}" class="btn btn-success">Editar</a>
+							<a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Remover</a>
 						</td>
 					</tr>
 				</tbody>

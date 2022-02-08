@@ -24,25 +24,25 @@ public class EquipmentController {
 	}
 	
 	@GetMapping("/equipment")
-	public String saveEquipment(Model model) {
+	public String insert(Model model) {
 		model.addAttribute("equipment", service.getEquipment());
 		return "equipment-page";
 	}
 
 	@GetMapping("/equipment/{id}")
-	public String saveEquipment(@PathVariable("id") Long id, Model model) {
+	public String update(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("equipment", service.findById(id));
 		return "equipment-page";
 	}
 	
 	@PostMapping("/saveEquipment")
-	public String saveEquipment(@ModelAttribute("equipment") Equipment equipment) {		
+	public String save(@ModelAttribute("equipment") Equipment equipment) {		
 		service.save(equipment);
 		return "redirect:/equipments";
 	}
 	
 	@GetMapping("/deleteEquipment/{id}")
-	public String deleteEquipment(@PathVariable("id") Long id) {
+	public String delete(@PathVariable("id") Long id) {
 		if (service.delete(id)) {
 			return "redirect:/equipments";
 		} else
