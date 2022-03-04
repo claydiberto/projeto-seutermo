@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.devca.seutermo.entities.Term;
+import com.devca.seutermo.services.AnalystService;
+import com.devca.seutermo.services.EmployeeService;
+import com.devca.seutermo.services.EquipmentService;
 import com.devca.seutermo.services.TermService;
 
 @Controller
@@ -16,6 +19,15 @@ public class TermController {
 	
 	@Autowired
 	private TermService service;
+	
+	@Autowired
+	private EquipmentService equipmentService;
+	
+	@Autowired
+	private AnalystService analystService;
+	
+	@Autowired
+	private EmployeeService employeeService;
 
 //	@GetMapping("/terms")
 //	public String terms(Model model) {
@@ -36,6 +48,9 @@ public class TermController {
 	@GetMapping("/term")
 	public String insert(Model model) {
 		model.addAttribute("term", service.getTerm());
+		model.addAttribute("analystList", analystService.findAll());
+		model.addAttribute("employeeList", employeeService.findAll());
+		model.addAttribute("equipmentList", equipmentService.findAll());
 		return "term-page";
 	}
 

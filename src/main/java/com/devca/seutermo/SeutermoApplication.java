@@ -1,7 +1,5 @@
 package com.devca.seutermo;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -58,12 +56,6 @@ public class SeutermoApplication implements CommandLineRunner {
 		Analyst a1 = new Analyst(null, "ANTONIO", "ANASCIMENTO@CONSORCIOFTS.COM.BR", "METROFOR", "NJSDF9");
 		analystRepository.save(a1);
 		
-		Term t = new Term();
-		t.getListOfEquipments().add(e1);
-		t.getListOfEquipments().add(e2);
-		t.setAnalyst(a1);
-		termRepository.save(t);
-		
 		
 		Employee c1 = new Employee();
 		c1.setId(1L);
@@ -71,6 +63,13 @@ public class SeutermoApplication implements CommandLineRunner {
 		c1.setEmail("JORGE@FTS.COM.BR");
 		c1.setCpf("546231561");
 		employeeRepository.save(c1);
+		
+		Term t = new Term();
+		t.getListOfEquipments().add(e1);
+		t.getListOfEquipments().add(e2);
+		t.setAnalyst(a1);
+		t.setEmployee(c1);
+		termRepository.save(t);
 		
 		
 		
