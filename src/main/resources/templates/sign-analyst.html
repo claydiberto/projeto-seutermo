@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Employee signature</title>
+	<div th:replace="fragments :: sign"></div>
+	<script>
+		$(document).ready(function () {
+			$('#myCanvas').sign({
+				resetButton: $('#resetSign'),
+				lineWidth: 5
+			});
+		});
+	</script>
+	<style>
+		#myCanvas {
+			border: 2px solid #444;
+			border-radius: 10px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<canvas id="myCanvas"></canvas>
+	<div>
+		<button value="Reset" id='resetSign'>Limpar</button>
+		<button type="button" id="saveImage">Save image</button>
+	</div>
+
+	
+
+	<div>
+		<form th:action="@{/saveSignAnalyst}" th:object="${term}" method="post">
+			<input type="hidden" th:field="*{id}" />
+			<input type="hidden" th:field="*{analyst}" />
+			<input type="hidden" th:field="*{employee}" />
+
+			<div class="form-group">
+				<image id="imgConverted" class="form-control-file" />
+				<input th:field="*{employeeSubscription}" id="employeeSubscription" />
+			</div>
+
+			
+
+			<input type="text" class="form-control" th:field=*{analystSubscription} name="analystSubscription" />
+
+			<button type="submit">Avancar</button>
+		</form>
+	</div>
+
+
+	<script>
+		const btnSaveImage = document.querySelector('#saveImage');
+		const imgConverted = document.querySelector('#imgConverted');
+		const string = document.querySelector('#employeeSubscription');
+
+		let str = 'data:image/png;base64,';
+		let canvas, ctx, dataURI, strConverted;
+		
+		btnSaveImage.addEventListener("click", function () {
+			canvas = document.getElementById("myCanvas");
+			ctx = canvas.getContext('2d');
+			string.value
+			dataURI = str + string.value;
+
+			imgConverted.src = dataURI;
+
+			console.log('string value: ' + string.value);
+			console.log(dataURI);
+
+		});
+
+		
+
+
+	</script>
+
+</body>
+
+</html>

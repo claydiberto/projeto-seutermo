@@ -22,6 +22,10 @@ public class EmployeeService {
 		return repository.findById(id).get();
 	}
 	
+	public Employee findByEmail(String email) {
+		return repository.findByEmail(email);
+	}
+	
 	public Employee getEmployee() {
 		Employee employee = new Employee();
 		return employee;

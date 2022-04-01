@@ -1,15 +1,10 @@
 package com.devca.seutermo.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.devca.seutermo.entities.enums.EquipmentStatus;
@@ -43,7 +38,7 @@ public class Equipment {
 	@Enumerated
 	private EquipmentStatus equipmentStatus = EquipmentStatus.DISPONIVEL;
 	
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "listOfEquipments")
-	private List<Term> listOfTerms = new ArrayList<>();
+//	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "listOfEquipments")
+//	private List<Term> listOfTerms = new ArrayList<>();
 	
 }

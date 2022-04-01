@@ -2,8 +2,25 @@
 <html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
 
 <head>
-<title>Terms</title>
-<div th:replace="fragments :: header"></div>
+	<title>Terms</title>
+	<div th:replace="fragments :: header"></div>
+	<div th:replace="fragments :: sign"></div>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+	<script>
+		$(document).ready(function () {
+			$('#myCanvas').sign({
+				resetButton: $('#resetSign')
+			});
+		});
+	</script>
+	<style>
+		#myCanvas {
+			border: 2px solid #444;
+			border-radius: 10px;
+			width: 300px;
+			height: 200px;
+		}
+	</style>
 </head>
 
 <body>
@@ -18,58 +35,61 @@
 
 		<div class="row justify-content-center mt-3">
 
-			<form th:action="@{/saveTerm}" th:object="${term}" method="post"
+			<form th:action="@{/saveTerm}" th:object="${termDTO}" method="post"
 				class="col-10 col-md-8 col-lg-6 col-xl-6">
 
 				<input type="hidden" th:field="*{id}" />
 
 				<div class="mb-3">
-					<label for="dropAnalysts" class="form-label">Analista</label> 
+					<label for="dropAnalysts" class="form-label">Analista</label>
 					<select name="dropAnalysts" class="form-control" th:field=*{analyst}>
-						<option th:each="analyst : ${analystList}"
-                            th:value="${analyst}" th:text="${analyst.getEmail}"></option>
+						<option th:each="analyst : ${analystList}" th:value="${analyst.getEmail}"
+							th:text="${analyst.getEmail}"></option>
 					</select>
 				</div>
 
 				<div class="mb-3">
-					<label for="dropEmployess" class="form-label">Colaborador</label> 
+					<label for="dropEmployess" class="form-label">Colaborador</label>
 					<select name="dropEmployess" class="form-control" th:field=*{employee}>
-						<option th:each="employee : ${employeeList}"
-                            th:value="${employee}" th:text="${employee.getEmail}"></option>
+						<option th:each="employee : ${employeeList}" th:value="${employee.getEmail}"
+							th:text="${employee.getEmail}"></option>
 					</select>
 				</div>
 
 				<div class="mb-3 form-group">
-					<label for="dropEquipments" class="form-label">Equipamentos</label>
-					<select name="dropEquipments" class="form-control" th:field=*{listOfEquipments}>
-
-						<option th:each="equipment : ${equipmentList}"
-							th:value="${listOfEquipments}"
-							th:text="${equipment.getModel}"></option>
+					<label for="checkEquipments" class="form-label">Equipamentos</label>
+					<select name="checkEquipments" class="form-control selectpicker" th:field=*{listOfEquipments}
+						multiple data-live-search="true">
+						<option th:each="equipment : ${equipmentList}" th:value="${equipment.id}"
+							th:text="|${equipment.equipmentType} - ${equipment.serialNumber}|"></option>
 					</select>
 				</div>
 
-				<div>ASSINATURAS</div>
+
+
+
+
+				<div class="mb-3 row justify-content-between">
+					<div class="col-auto">
+						<a class="btn btn-secondary" th:href="@{/terms}">Cancelar</a>
+					</div>
+
+					<div class="col-auto">
+						<button type="submit" class="btn btn-success">Salvar</button>
+					</div>
+
+				</div>
+
+			</form>
+
 		</div>
-
-
-		<div class="mb-3 row justify-content-between">
-			<div class="col-auto">
-				<a class="btn btn-secondary" th:href="@{/terms}">Cancelar</a>
-			</div>
-			<div class="col-auto">
-				<button type="submit" class="btn btn-success">Salvar</button>
-			</div>
-		</div>
-
-		</form>
-
-	</div>
 
 	</div>
 
 	<div th:replace="fragments :: footer"></div>
 
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 </body>
 
 </html>

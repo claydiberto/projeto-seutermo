@@ -31,7 +31,7 @@ public class TermService {
 		repository.save(term);
 	}
 	
-	// modificar o satus do termo e dos itens quando fechar o termo
+	// modificar o status do termo e dos itens quando fechar o termo
 	// nao deletar
 	public Boolean delete(Long id) {
 		try {

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.devca.seutermo.entities.Equipment;
+import com.devca.seutermo.entities.enums.EquipmentStatus;
 import com.devca.seutermo.repositories.EquipmentRepository;
 
 @Service
@@ -38,6 +39,18 @@ public class EquipmentService {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	public void changeStatus(Equipment equipment, EquipmentStatus status) {
+		if (status == EquipmentStatus.EMPRESTADO) {
+			equipment.setEquipmentStatus(EquipmentStatus.EMPRESTADO);
+		} else if (status == EquipmentStatus.DANIFICADO) {
+			equipment.setEquipmentStatus(EquipmentStatus.DANIFICADO);
+		} else {
+			equipment.setEquipmentStatus(EquipmentStatus.DISPONIVEL);
+		}
+		
+		save(equipment);		
 	}
 	 
 }

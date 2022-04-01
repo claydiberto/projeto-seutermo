@@ -6,4 +6,6 @@ import com.devca.seutermo.entities.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
+	Employee findByEmail(String email);
+	
 }

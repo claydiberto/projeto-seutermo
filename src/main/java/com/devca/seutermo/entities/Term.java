@@ -3,6 +3,7 @@ package com.devca.seutermo.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -51,6 +53,11 @@ public class Term {
 			joinColumns = @JoinColumn(name = "term_id"),
 			inverseJoinColumns = @JoinColumn(name = "equipment_id"))
 	private List<Equipment> listOfEquipments = new ArrayList<>();
+	
+	@Lob @Basic(fetch = FetchType.LAZY)
+	private String employeeSubscription;
+	
+	private String analystSubscription;
 	
 	public void addEquipment(Equipment equipment) {
 		getListOfEquipments().add(equipment);

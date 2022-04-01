@@ -64,6 +64,13 @@ public class SeutermoApplication implements CommandLineRunner {
 		c1.setCpf("546231561");
 		employeeRepository.save(c1);
 		
+		Employee c2 = new Employee();
+		c2.setId(2L);
+		c2.setName("MARIA");
+		c2.setEmail("MARIA@FTS.COM.BR");
+		c2.setCpf("278349861");
+		employeeRepository.save(c2);
+		
 		Term t = new Term();
 		t.getListOfEquipments().add(e1);
 		t.getListOfEquipments().add(e2);

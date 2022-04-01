@@ -22,6 +22,10 @@ public class AnalystService {
 		return repository.findById(id).get();
 	}
 	
+	public Analyst findByEmail(String email) {
+		return repository.findByEmail(email);
+	}
+	
 	public Analyst getAnalyst() {
 		Analyst analyst = new Analyst();
 		return analyst;
