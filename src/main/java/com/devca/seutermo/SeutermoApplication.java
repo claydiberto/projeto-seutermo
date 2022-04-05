@@ -1,5 +1,7 @@
 package com.devca.seutermo;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,6 +12,7 @@ import com.devca.seutermo.entities.Employee;
 import com.devca.seutermo.entities.Equipment;
 import com.devca.seutermo.entities.Term;
 import com.devca.seutermo.entities.enums.EquipmentType;
+import com.devca.seutermo.entities.enums.StatusTerm;
 import com.devca.seutermo.repositories.AnalystRepository;
 import com.devca.seutermo.repositories.EmployeeRepository;
 import com.devca.seutermo.repositories.TermRepository;
@@ -72,29 +75,14 @@ public class SeutermoApplication implements CommandLineRunner {
 		employeeRepository.save(c2);
 		
 		Term t = new Term();
+		t.setMoment(LocalDateTime.now());
+		t.setStatusTerm(StatusTerm.ENTREGUE);
 		t.getListOfEquipments().add(e1);
 		t.getListOfEquipments().add(e2);
 		t.setAnalyst(a1);
 		t.setEmployee(c1);
 		termRepository.save(t);
 		
-		
-		
-		
-//		List<Term> listEq = termRepository.findEquipmentHasTerm();
-//		
-//		for (Term te: listEq) {
-//			System.out.println(te.getAnalyst().getName());
-//			
-//			for (Equipment eq: te.getListOfEquipments()) {
-//				System.out.println(eq.getFabricator());
-//				System.out.println(eq.getSerialNumber());
-//			}
-//		}
-		
-		
 	}
-	
-	
 
 }

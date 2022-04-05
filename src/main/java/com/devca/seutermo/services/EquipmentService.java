@@ -19,6 +19,10 @@ public class EquipmentService {
 		return repository.findAll();
 	}
 	
+	public List<Equipment> findAvailable() {
+		return repository.findAvailable();
+	}
+	
 	public Equipment findById(Long id) {
 		return repository.findById(id).get();
 	}

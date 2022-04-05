@@ -21,15 +21,13 @@ public class TermDTO {
 	private Long id;
 	private String analyst;
 	private String employee;
-	private List<String> listOfEquipments = new ArrayList<>();
+	private List<Equipment> listOfEquipments = new ArrayList<>();
 	
-//	private String employeeSubscription;
-//	private String analystSubscription;
+	private String employeeSubscription;
+	private String analystSubscription;
 	
-	public void addEquipment(String equipment) {
+	public void addEquipment(Equipment equipment) {
 		getListOfEquipments().add(equipment);
 	}
-	
-
 
 }

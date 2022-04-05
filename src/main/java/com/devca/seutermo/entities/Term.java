@@ -1,5 +1,6 @@
 package com.devca.seutermo.entities;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.devca.seutermo.entities.enums.StatusTerm;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -37,9 +40,6 @@ public class Term {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-//	private Instant moment;
-//	private StatusTerm statusTerm;
-	
 	@ManyToOne
 	@JoinColumn(name = "analyst_id")
 	private Analyst analyst;
@@ -59,6 +59,9 @@ public class Term {
 	
 	@Lob @Basic(fetch = FetchType.LAZY)
 	private String analystSubscription;
+	
+	private LocalDateTime moment;
+	private StatusTerm statusTerm;
 	
 	public void addEquipment(Equipment equipment) {
 		getListOfEquipments().add(equipment);
