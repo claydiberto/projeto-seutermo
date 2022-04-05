@@ -2,8 +2,7 @@
 <html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
 
 <head>
-	<meta charset="ISO-8859-1">
-	<title>Equipments</title>
+	<title>Termos</title>
 	<div th:replace="fragments :: header"></div>
 </head>
 
@@ -12,44 +11,46 @@
 	<div th:replace="fragments :: navbar"></div>
 
 	<div class="container">
+
 		<div class="d-flex justify-content-center pt-5 pb-3 mt-3">
-			<h1>LISTA DE TERMOS</h1>
+			<h1>Lista de termos</h1>
 		</div>
 
-		<a th:href="@{/term}" class="btn btn-primary">+ Termo</a>
+		<a th:href="@{/term}" class="btn btn-primary">Adicionar Termo</a>
 
-		<div class="row justify-content-center mt-3 table-responsive-md">
-			<table class="table table-hover">
+		<div class="row mt-3 table-responsive">
+			<table class="table table-hover align-middle">
 				<thead class="table-light">
 					<tr>
-						<th>ID</th>
-						<td>Analista</td>
-						<td>Colaborador</td>
-						<td>Equipamentos</td>
+						<th scope="col">ID</th>
+						<td scope="col">Entregue</td>
+						<td scope="col">Analista</td>
+						<td scope="col">Colaborador</td>
+						<td scope="col">Status</td>
+						<td scope="col">Detalhes</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="term: ${termList}">
-						<th th:text="${term.id}"></th>
+						<th th:text="${term.id}" scope="row"></th>
+						<td th:text="${term.moment}"></td>
 						<td th:text="${term.analyst.getName}"></td>
 						<td th:text="${term.employee.getName}"></td>
-						<th:block th:each="equip: ${term.listOfEquipments}">
+						<!-- <th:block th:each="equip: ${term.listOfEquipments}">
 							<td th:text="|[${equip.equipmentType}: ${equip.serialNumber}]|"></td>
-						</th:block>
+						</th:block> -->
+						<td th:text="${term.statusTerm}"></td>
 						<td>
-							<a th:href="@{/term/{id}(id=${term.id})}" class="btn btn-success">Devolver</a>
+							<a th:href="@{/term/{id}(id=${term.id})}" class="btn btn-success">Abrir</a>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-
-
-
-
-			<div th:replace="fragments :: footer"></div>
 		</div>
 
 	</div>
+
+	<div th:replace="fragments :: footer"></div>
 
 </body>
 

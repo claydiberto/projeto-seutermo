@@ -2,78 +2,43 @@
 <html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
 
 <head>
-	<meta charset="ISO-8859-1">
 	<title>Employee signature</title>
-	<div th:replace="fragments :: sign"></div>
-	<script>
-		$(document).ready(function () {
-			$('#myCanvas').sign({
-				resetButton: $('#resetSign'),
-				lineWidth: 5
-			});
-		});
-	</script>
-	<style>
-		#myCanvas {
-			border: 2px solid #444;
-			border-radius: 10px;
-		}
-	</style>
+	<div th:replace="fragments :: header"></div>
+	<div th:replace="fragments :: signatureCanvas"></div>
 </head>
 
 <body>
 
-	<canvas id="myCanvas"></canvas>
-	<div>
-		<button value="Reset" id='resetSign'>Limpar</button>
-		<button type="button" id="saveImage">Save image</button>
+	<div class="mt-3 mb-1 row justify-content-center">
+		<div class="col-auto">
+			<h3>Assinatura do colaborador</h3>
+		</div>
+	</div>
+
+	<div class="row justify-content-center mt-5">
+		<canvas id="myCanvas"></canvas>
+	</div>
+
+	<div class="mt-3 row justify-content-center">
+		<div class="col-auto">
+			<button value="Reset" class="btn btn-danger" id='resetSign'>Limpar</button>
+		</div>
+		<div class="col-auto">
+			<button type="button" class="btn btn-success" id="saveSign" onclick="saveSign()">Salvar</button>
+		</div>
 	</div>
 
 	<div>
-		<form th:action="@{/saveSignEmployee}" th:object="${term}" method="post" enctype="multipart/form-data">
-
-			<div class="form-group">
-				<image id="imgConverted" class="form-control-file" />
-			</div>
-
-			<div class="form-group">
-				<input type="file" name="file" class="form-control-file" id="inputFile">
-			</div>
-
-			<button type="submit" class="btn btn-primary">SAVE</button>
-
-			<hr />
+		<form th:action="@{/saveSignEmployee}" id="formSign" th:object="${term}" method="post">
 			<input type="hidden" th:field="*{id}" />
 			<input type="hidden" th:field="*{analyst}" />
 			<input type="hidden" th:field="*{employee}" />
-			<input type="hidden" th:field="*{employeeSubscription}" id="imgInput" />
+			<input type="hidden" th:field="*{listOfEquipments}" />
+			<input type="hidden" th:field="*{employeeSubscription}" id="fieldSign" />
 		</form>
 	</div>
 
-	<script>
-		const btnSaveImage = document.querySelector('#saveImage');
-		const imgConverted = document.querySelector('#imgConverted');
-		const inputFile = document.querySelector('#inputFile');
-		const imgInput = document.querySelector('#imgInput');
-
-		let canvas, ctx, dataURI, teste;
-
-		btnSaveImage.addEventListener("click", function () {
-			canvas = document.getElementById("myCanvas");
-			ctx = canvas.getContext('2d');
-			dataURI = canvas.toDataURL("img.png");
-			imgConverted.src = dataURI;
-			
-			//testes
-
-			teste = canvas.toDataURL().split(",")[1];
-			console.log(teste);
-			
-			imgInput.value = teste;
-
-		});
-
-	</script>
+	<div th:replace="fragments :: saveCanvas"></div>
 
 </body>
 

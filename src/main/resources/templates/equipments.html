@@ -2,31 +2,8 @@
 <html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
 
 <head>
-	<meta charset="ISO-8859-1">
 	<title>Equipment</title>
 	<div th:replace="fragments :: header"></div>
-
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11">
-		function deleteConfirm() {
-			Swal.fire({
-				title: 'Você deseja deletar?',
-				icon: 'warning',
-				showCancelButton: true,
-				cancelButtonColor: '#3085d6',
-				confirmButtonColor: '#d33',
-				confirmButtonText: 'Deletar'
-			}).then((result) => {
-				if (result.isConfirmed) {
-					Swal.fire(
-						'Deletado!',
-						'O registro foi deletado.',
-						'success'
-					);
-				}
-			})
-		}
-	</script>
-
 </head>
 
 <body>
@@ -36,27 +13,27 @@
 	<div class="container">
 
 		<div class="d-flex justify-content-center pt-5 pb-3 mt-3">
-			<h1>LISTA DE EQUIPAMENTOS</h1>
+			<h1>Lista de equipamentos</h1>
 		</div>
 
 		<a th:href="@{/equipment}" class="btn btn-primary">Adicionar Equipamento</a>
 
-		<div class="row justify-content-center mt-3 table-responsive-md">
-			<table class="table table-hover">
+		<div class="row mt-3 table-responsive">
+			<table class="table table-hover align-middle">
 				<thead class="table-light">
 					<tr>
-						<th>ID</th>
-						<td>Tipo de equipamento</td>
-						<td>Fabricante</td>
-						<td>Modelo</td>
-						<td>Serial Number</td>
-						<td>Status</td>
-						<td>Ações</td>
+						<th scope="col">ID</th>
+						<td scope="col">Tipo de equipamento</td>
+						<td scope="col">Fabricante</td>
+						<td scope="col">Modelo</td>
+						<td scope="col">Serial Number</td>
+						<td scope="col">Status</td>
+						<td scope="col">Ações</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="equipment: ${equipmentList}">
-						<th th:text="${equipment.id}"></th>
+						<th th:text="${equipment.id}" scope="row"></th>
 						<td th:text="${equipment.equipmentType}"></td>
 						<td th:text="${equipment.fabricator}"></td>
 						<td th:text="${equipment.model}"></td>
@@ -64,16 +41,18 @@
 						<td th:text="${equipment.equipmentStatus}"></td>
 						<td>
 							<a th:href="@{/equipment/{id}(id=${equipment.id})}" class="btn btn-success">Editar</a>
-							<a th:href="@{/deleteEquipment/{id}(id=${equipment.id})}" class="btn btn-danger">Remover</button>
+							<a th:href="@{/deleteEquipment/{id}(id=${equipment.id})}"
+								class="btn btn-danger">Remover</button>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-
-			<div th:replace="fragments :: footer"></div>
 		</div>
 
 	</div>
+
+	<div th:replace="fragments :: footer"></div>
+
 </body>
 
 </html>

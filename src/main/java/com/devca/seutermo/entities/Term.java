@@ -37,8 +37,8 @@ public class Term {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-//	private Instant momento;
-//	private StatusTermo statusTermo;
+//	private Instant moment;
+//	private StatusTerm statusTerm;
 	
 	@ManyToOne
 	@JoinColumn(name = "analyst_id")
@@ -57,6 +57,7 @@ public class Term {
 	@Lob @Basic(fetch = FetchType.LAZY)
 	private String employeeSubscription;
 	
+	@Lob @Basic(fetch = FetchType.LAZY)
 	private String analystSubscription;
 	
 	public void addEquipment(Equipment equipment) {

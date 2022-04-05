@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.devca.seutermo.entities.Equipment;
@@ -26,8 +24,6 @@ import com.devca.seutermo.services.TermService;
 @Controller
 public class TermController {
 	
-	private final String UPLOAD_DIR = "./src/main/resources/signImages/";
-	
 	@Autowired
 	private TermService service;
 	
@@ -42,16 +38,6 @@ public class TermController {
 	
 	@Autowired
 	private EmployeeService employeeService;
-
-//	@GetMapping("/terms")
-//	public String terms(Model model) {
-//		
-//		Stream<Analyst> map = analystRepository.findAll().stream();
-//		
-//		model.addAllAttributes("analysts", map);
-//		
-//		return "null";
-//	}
 	
 	@GetMapping("/terms")
 	public String terms(Model model) {
@@ -65,7 +51,7 @@ public class TermController {
 		model.addAttribute("termDTO", termDTOService.getTermDTO());
 		model.addAttribute("analystList", analystService.findAll());
 		model.addAttribute("employeeList", employeeService.findAll());
-		model.addAttribute("equipmentList", equipmentService.findAll());
+		model.addAttribute("equipmentList", equipmentService.findAll()); //find so em equip.disponivel
 		return "term-page";
 	}
 	
@@ -86,21 +72,9 @@ public class TermController {
 		}
 				
 		service.save(termo);
-		
 		String str = "redirect:/signEmployee/" + termo.getId();
-		
 		return str;
-//		return "redirect:/signEmployee";
-//		return "redirect:/terms";
 	}
-	
-	//
-	//
-	//
-	
-	
-	
-	
 	
 	@GetMapping("/signEmployee/{id}")
 	public String signEmployee(@PathVariable("id") Long id, Model model) {
@@ -108,41 +82,12 @@ public class TermController {
 		return "sign-employee";
 	}
 	
-	//backup
-	//
-//	@PostMapping("/saveSignEmployee")
-//	public String saveSignEmployee(@ModelAttribute("term") Term term, @RequestParam("file") MultipartFile file, RedirectAttributes attributes) {		
-//		service.save(term);
-//		String str = "redirect:/signAnalyst/" + term.getId();
-//		return str; 
-//	}
-	
 	@PostMapping("/saveSignEmployee")
-	public String saveSignEmployee(@ModelAttribute("term") Term term, @RequestParam("file") MultipartFile file, RedirectAttributes attributes) {
-		
-//		// normalize the file path
-//        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-//
-//        // save the file on the local file system
-//        Path path = null;
-//        try {
-//            path = Paths.get(UPLOAD_DIR + fileName);
-//            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        
-		//term.setEmployeeSubscription(path.toString());
-		
-		System.out.println(term.getEmployeeSubscription());
+	public String saveSignEmployee(@ModelAttribute("term") Term term, RedirectAttributes attributes) {
 		service.save(term);
 		String str = "redirect:/signAnalyst/" + term.getId();
 		return str; 
 	}
-	
-	
-	
-	
 	
 	@GetMapping("/signAnalyst/{id}")
 	public String signAnalyst(@PathVariable("id") Long id, Model model) {
@@ -155,37 +100,5 @@ public class TermController {
 		service.save(term);
 		return "redirect:/terms"; 
 	}
-	
-	
-
-	
-//	@PostMapping("/saveTerm")
-//	public String save(@ModelAttribute("termDTO") TermDTO termDTO) {
-//		
-//		//tenho string de email de analyst e employee
-//		
-//		
-//		Term term = service.getTerm();
-//		String test = termDTO.getAnalyst();
-//		
-//		term.setAnalyst(analystService.findByEmail(test));
-//		
-//		String test2 = termDTO.getEmployee();
-//		System.out.println(test);
-//		System.out.println(term.getAnalyst().getName());
-//		
-//		
-//		
-//		return "redirect:/terms";
-//	}
-	
-
-//	@GetMapping("/deleteEquipment/{id}")
-//	public String deleteEquipment(@PathVariable("id") Long id) {
-//		if (service.delete(id)) {
-//			return "redirect:/equipments";
-//		} else
-//			return "redirect:/";
-//	}
 
 }

@@ -4,23 +4,6 @@
 <head>
 	<title>Terms</title>
 	<div th:replace="fragments :: header"></div>
-	<div th:replace="fragments :: sign"></div>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-	<script>
-		$(document).ready(function () {
-			$('#myCanvas').sign({
-				resetButton: $('#resetSign')
-			});
-		});
-	</script>
-	<style>
-		#myCanvas {
-			border: 2px solid #444;
-			border-radius: 10px;
-			width: 300px;
-			height: 200px;
-		}
-	</style>
 </head>
 
 <body>
@@ -65,19 +48,14 @@
 					</select>
 				</div>
 
-
-
-
-
 				<div class="mb-3 row justify-content-between">
 					<div class="col-auto">
 						<a class="btn btn-secondary" th:href="@{/terms}">Cancelar</a>
 					</div>
 
 					<div class="col-auto">
-						<button type="submit" class="btn btn-success">Salvar</button>
+						<button class="btn btn-success" type="submit">Salvar</button>
 					</div>
-
 				</div>
 
 			</form>
@@ -88,8 +66,6 @@
 
 	<div th:replace="fragments :: footer"></div>
 
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 </body>
 
 </html>

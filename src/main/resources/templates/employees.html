@@ -2,7 +2,6 @@
 <html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
 
 <head>
-	<meta charset="ISO-8859-1">
 	<title>Employee</title>
 	<div th:replace="fragments :: header"></div>
 </head>
@@ -14,7 +13,7 @@
 	<div class="container">
 
 		<div class="d-flex justify-content-center pt-5 pb-3 mt-3">
-			<h1>LISTA DE COLABORADORES</h1>
+			<h1>Lista de colaboradores</h1>
 		</div>
 
 		<a th:href="@{/employee}" class="btn btn-primary">Adicionar Colaborador</a>
@@ -23,15 +22,16 @@
 			<table class="table table-hover">
 				<thead class="table-light">
 					<tr>
-						<th>ID</th>
-						<td>Nome</td>
-						<td>Email</td>
-						<td>CPF</td>
+						<th scope="col">ID</th>
+						<td scope="col">Nome</td>
+						<td scope="col">Email</td>
+						<td scope="col">CPF</td>
+						<td scope="col">Ações</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="employee: ${employeeList}">
-						<th th:text="${employee.id}"></th>
+						<th th:text="${employee.id}" scope="row"></th>
 						<td th:text="${employee.name}"></td>
 						<td th:text="${employee.email}"></td>
 						<td th:text="${employee.cpf}"></td>
@@ -42,11 +42,12 @@
 					</tr>
 				</tbody>
 			</table>
-
-			<div th:replace="fragments :: footer"></div>
 		</div>
 
 	</div>
+
+	<div th:replace="fragments :: footer"></div>
+
 </body>
 
 </html>
