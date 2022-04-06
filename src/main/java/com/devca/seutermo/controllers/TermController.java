@@ -15,6 +15,7 @@ import com.devca.seutermo.entities.TermDTO;
 import com.devca.seutermo.services.AnalystService;
 import com.devca.seutermo.services.EmployeeService;
 import com.devca.seutermo.services.EquipmentService;
+import com.devca.seutermo.services.PeripheralService;
 import com.devca.seutermo.services.TermDTOService;
 import com.devca.seutermo.services.TermService;
 
@@ -36,6 +37,9 @@ public class TermController {
 	@Autowired
 	private EmployeeService employeeService;
 	
+	@Autowired
+	private PeripheralService peripheralService;
+	
 	@GetMapping("/terms")
 	public String terms(Model model) {
 		model.addAttribute("termList", service.findAll());
@@ -48,6 +52,7 @@ public class TermController {
 		model.addAttribute("analystList", analystService.findAll());
 		model.addAttribute("employeeList", employeeService.findAll());
 		model.addAttribute("equipmentList", equipmentService.findAvailable());
+		model.addAttribute("peripheralList", peripheralService.findAll());
 		return "term-page";
 	}
 	

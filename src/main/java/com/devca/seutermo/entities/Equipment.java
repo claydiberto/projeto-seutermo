@@ -24,21 +24,22 @@ import lombok.Setter;
 @Entity
 @Table(name = "tb_equipment")
 public class Equipment {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Enumerated
 	private EquipmentType equipmentType;
-	private String fabricator;
-	private String model;
-	private String serialNumber;
 	
 	@Enumerated
 	private EquipmentStatus equipmentStatus = EquipmentStatus.DISPONIVEL;
-	
+
+	private String fabricator;
+	private String model;
+	private String serialNumber;
+
 //	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "listOfEquipments")
 //	private List<Term> listOfTerms = new ArrayList<>();
-	
+
 }

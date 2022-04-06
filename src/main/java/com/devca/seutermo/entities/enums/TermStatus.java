@@ -1,6 +1,6 @@
 package com.devca.seutermo.entities.enums;
 
-public enum StatusTerm {
+public enum TermStatus {
 
 	ENTREGUE, DEVOLVIDO;
 }

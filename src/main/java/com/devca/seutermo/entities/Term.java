@@ -17,7 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.devca.seutermo.entities.enums.StatusTerm;
+import com.devca.seutermo.entities.enums.TermStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -48,26 +48,33 @@ public class Term {
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "tb_term_equipment",
-			joinColumns = @JoinColumn(name = "term_id"),
-			inverseJoinColumns = @JoinColumn(name = "equipment_id"))
-	private List<Equipment> listOfEquipments = new ArrayList<>();
-	
 	@Lob @Basic(fetch = FetchType.LAZY)
 	private String employeeSubscription;
 	
 	@Lob @Basic(fetch = FetchType.LAZY)
 	private String analystSubscription;
 	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "tb_term_equipment",
+			joinColumns = @JoinColumn(name = "term_id"),
+			inverseJoinColumns = @JoinColumn(name = "equipment_id"))
+	private List<Equipment> listOfEquipments = new ArrayList<>();
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "tb_term_peripherals",
+	joinColumns = @JoinColumn(name = "term_id"),
+	inverseJoinColumns = @JoinColumn(name = "peripheral_id"))	
+	private List<Peripheral> listOfPeripherals = new ArrayList<>();
+	
 	private LocalDateTime moment;
-	private StatusTerm statusTerm;
+	private TermStatus termStatus;
 	
 	public void addEquipment(Equipment equipment) {
 		getListOfEquipments().add(equipment);
 	}
 	
-	//	
-//	private List<Peripherals> peripherals = new ArrayList<>();
+	public void addPeripheral(Peripheral peripheral) {
+		getListOfPeripherals().add(peripheral);
+	}
 
 }

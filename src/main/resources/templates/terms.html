@@ -40,7 +40,7 @@
 							<td th:text="|[${equip.equipmentType}: ${equip.serialNumber}]|"></td>
 						</th:block> -->
 						
-						<td th:text="${term.statusTerm}"></td>
+						<td th:text="${term.termStatus}"></td>
 						<td>
 							<a th:href="@{/term/{id}(id=${term.id})}" class="btn btn-success">Abrir</a>
 						</td>

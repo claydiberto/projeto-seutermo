@@ -10,11 +10,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.devca.seutermo.entities.Analyst;
 import com.devca.seutermo.entities.Employee;
 import com.devca.seutermo.entities.Equipment;
+import com.devca.seutermo.entities.Peripheral;
 import com.devca.seutermo.entities.Term;
 import com.devca.seutermo.entities.enums.EquipmentType;
-import com.devca.seutermo.entities.enums.StatusTerm;
+import com.devca.seutermo.entities.enums.TermStatus;
 import com.devca.seutermo.repositories.AnalystRepository;
 import com.devca.seutermo.repositories.EmployeeRepository;
+import com.devca.seutermo.repositories.PeripheralRepository;
 import com.devca.seutermo.repositories.TermRepository;
 import com.devca.seutermo.services.EquipmentService;
 
@@ -32,6 +34,9 @@ public class SeutermoApplication implements CommandLineRunner {
 	
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	
+	@Autowired
+	private PeripheralRepository peripheralRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SeutermoApplication.class, args);
@@ -74,9 +79,22 @@ public class SeutermoApplication implements CommandLineRunner {
 		c2.setCpf("278349861");
 		employeeRepository.save(c2);
 		
+		Peripheral p1 = new Peripheral();
+		p1.setId(1L);
+		p1.setName("MOUSE");
+		peripheralRepository.save(p1);
+		
+		Peripheral p2 = new Peripheral();
+		p2.setId(2L);
+		p2.setName("KEYBOARD");
+		peripheralRepository.save(p2);
+
+		
 		Term t = new Term();
+		t.getListOfPeripherals().add(p1);
+		t.getListOfPeripherals().add(p2);
 		t.setMoment(LocalDateTime.now());
-		t.setStatusTerm(StatusTerm.ENTREGUE);
+		t.setTermStatus(TermStatus.ENTREGUE);
 		t.getListOfEquipments().add(e1);
 		t.getListOfEquipments().add(e2);
 		t.setAnalyst(a1);

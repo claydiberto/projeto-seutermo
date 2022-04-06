@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.devca.seutermo.entities.Equipment;
+import com.devca.seutermo.entities.Peripheral;
 import com.devca.seutermo.entities.Term;
 import com.devca.seutermo.entities.TermDTO;
 import com.devca.seutermo.entities.enums.EquipmentStatus;
-import com.devca.seutermo.entities.enums.StatusTerm;
+import com.devca.seutermo.entities.enums.TermStatus;
 import com.devca.seutermo.repositories.TermRepository;
 
 @Service
@@ -27,6 +28,9 @@ public class TermService {
 	
 	@Autowired
 	private EmployeeService employeeService;
+	
+	@Autowired
+	private PeripheralService peripheralService;
 		
 	public List<Term> findAll() {
 		return repository.findAll();
@@ -45,13 +49,18 @@ public class TermService {
 		Term term = getTerm(); 
 		term.setAnalyst(analystService.findByEmail(termDTO.getAnalyst()));
 		term.setEmployee(employeeService.findByEmail(termDTO.getEmployee()));
-		term.setStatusTerm(StatusTerm.ENTREGUE);
+		term.setTermStatus(TermStatus.ENTREGUE);
 		term.setMoment(LocalDateTime.now());
 		
 		for (Equipment equipmentId : termDTO.getListOfEquipments()) {
 			Equipment equipment = equipmentService.findById(equipmentId.getId());
 			term.addEquipment(equipment);
 			equipmentService.changeStatus(equipment, EquipmentStatus.EMPRESTADO);
+		}
+		
+		for (Peripheral peripheralId : termDTO.getListOfPeripherals()) {
+			Peripheral peripheral = peripheralService.findById(peripheralId.getId());
+			term.addPeripheral(peripheral);
 		}
 		
 		repository.save(term);

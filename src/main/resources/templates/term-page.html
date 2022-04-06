@@ -47,6 +47,15 @@
 					</select>
 				</div>
 
+				<div class="mb-3 form-group">
+					<label for="checkPeripherals" class="form-label">Periféricos</label>
+					<select name="checkPeripherals" class="form-control selectpicker" th:field=*{listOfPeripherals}
+						multiple data-live-search="true">
+						<option th:each="peripheral : ${peripheralList}" th:value="${peripheral.id}"
+							th:text="${peripheral.getName}"></option>
+					</select>
+				</div>
+
 				<div class="mb-3 row justify-content-between">
 					<div class="col-auto">
 						<a class="btn btn-secondary" th:href="@{/terms}">Cancelar</a>
