@@ -33,12 +33,13 @@
 				<tbody>
 					<tr th:each="term: ${termList}">
 						<th th:text="${term.id}" scope="row"></th>
-						<td th:text="${term.moment}"></td>
+						<td th:text="${#temporals.format(term.moment, 'dd/MM/yyyy - HH:mm')}"></td>
 						<td th:text="${term.analyst.getName}"></td>
 						<td th:text="${term.employee.getName}"></td>
 						<!-- <th:block th:each="equip: ${term.listOfEquipments}">
 							<td th:text="|[${equip.equipmentType}: ${equip.serialNumber}]|"></td>
 						</th:block> -->
+						
 						<td th:text="${term.statusTerm}"></td>
 						<td>
 							<a th:href="@{/term/{id}(id=${term.id})}" class="btn btn-success">Abrir</a>

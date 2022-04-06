@@ -4,6 +4,7 @@
 <head>
 	<title>Terms</title>
 	<div th:replace="fragments :: header"></div>
+	<div th:replace="fragments :: selectPickerHeader"></div>
 </head>
 
 <body>
@@ -20,8 +21,6 @@
 
 			<form th:action="@{/saveTerm}" th:object="${termDTO}" method="post"
 				class="col-10 col-md-8 col-lg-6 col-xl-6">
-
-				<!-- <input type="hidden" th:field="*{id}" /> -->
 
 				<div class="mb-3">
 					<label for="dropAnalysts" class="form-label">Analista</label>
@@ -65,6 +64,7 @@
 	</div>
 
 	<div th:replace="fragments :: footer"></div>
+	<div th:replace="fragments :: selectPickerFooter"></div>
 
 </body>
 
