@@ -50,7 +50,7 @@ public class EquipmentService {
 			equipment.setEquipmentStatus(EquipmentStatus.EMPRESTADO);
 		} else if (status == EquipmentStatus.DANIFICADO) {
 			equipment.setEquipmentStatus(EquipmentStatus.DANIFICADO);
-		} else {
+		} else if (status == EquipmentStatus.DISPONIVEL) {
 			equipment.setEquipmentStatus(EquipmentStatus.DISPONIVEL);
 		}
 		

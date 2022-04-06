@@ -35,14 +35,10 @@
 						<th th:text="${term.id}" scope="row"></th>
 						<td th:text="${#temporals.format(term.moment, 'dd/MM/yyyy - HH:mm')}"></td>
 						<td th:text="${term.analyst.getName}"></td>
-						<td th:text="${term.employee.getName}"></td>
-						<!-- <th:block th:each="equip: ${term.listOfEquipments}">
-							<td th:text="|[${equip.equipmentType}: ${equip.serialNumber}]|"></td>
-						</th:block> -->
-						
+						<td th:text="${term.employee.getName}"></td>						
 						<td th:text="${term.termStatus}"></td>
 						<td>
-							<a th:href="@{/term/{id}(id=${term.id})}" class="btn btn-success">Abrir</a>
+							<a th:href="@{/term/details/{id}(id=${term.id})}" class="btn btn-success">Abrir</a>
 						</td>
 					</tr>
 				</tbody>

@@ -11,4 +11,5 @@ public class TermDTOService {
 		TermDTO dto = new TermDTO();
 		return dto;
 	}
+
 }

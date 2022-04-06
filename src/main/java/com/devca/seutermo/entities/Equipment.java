@@ -39,7 +39,4 @@ public class Equipment {
 	private String model;
 	private String serialNumber;
 
-//	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "listOfEquipments")
-//	private List<Term> listOfTerms = new ArrayList<>();
-
 }

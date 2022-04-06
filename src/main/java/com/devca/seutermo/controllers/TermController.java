@@ -92,5 +92,11 @@ public class TermController {
 		service.saveSign(termDTO, "analyst");
 		return "redirect:/terms"; 
 	}
+	
+	@GetMapping("/term/details/{id}")
+	public String termDetails(@PathVariable("id") Long id, Model model) {		
+		model.addAttribute("term", this.service.findById(id) );
+		return "term-detail";
+	}	
 
 }

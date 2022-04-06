@@ -30,6 +30,5 @@ public class PeripheralService {
 	public void save(Peripheral peripheral) {
 		repository.save(peripheral);
 	}
-
-
+	
 }
