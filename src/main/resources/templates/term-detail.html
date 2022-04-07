@@ -2,10 +2,15 @@
 <html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
 
 <head>
-    <title>Term</title>
-    <div th:replace="fragments :: header"></div>
+	<title>Term</title>
+	<div th:replace="fragments :: header"></div>
+	<link th:href="@{/css/styles.css}" rel="stylesheet" />
 
-    <meta charset="UTF-8">
+
+
+	<link rel="stylesheet" href="../static/css/styles.css">
+
+	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -21,66 +26,176 @@
 
 <body>
 
-    <div th:replace="fragments :: navbar"></div>
+	<div th:replace="fragments :: navbar"></div>
 
-    <nav class="navbar navbar-expand-md fixed-top navbar-light bg-light" style="background-color: #309fee;">
-		<div class="container-fluid">
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
-				aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-				<a class="navbar-brand" href="/">ICON</a>
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item">
-						<a class="nav-link active" href="/terms">Termos</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active" href="/equipments">Equipamentos</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active" href="/analysts">Analistas</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active" href="/employees">Colaboradores</a>
-					</li>
-				</ul>
+	<div class="container mt-5 pt-2" id="term-detail">
+
+		<div class="row justify-content-between mt-1">
+			<div class="col-auto">
+				<img src="" alt="logo" />
+			</div>
+			<div class="col-auto">
+				<h5>Termo de Entrega, Devolução e Responsabilidade de Equipamentos</h5>
 			</div>
 		</div>
-	</nav>
 
-    <div class="container">
+		<div class="row justify-content pt-3">
+			<div class="col-auto">
+				<p>
+					Pelo presente Termo de Entrega, Devolução e Responsabilidade para uso de equipamentos corporativos
+					Eu, <span th:text="${term.employee.getName}"></span> portador (a) do e-mail
+					<span th:text="${term.employee.getEmail}"></span>, CPF: <span
+						th:text="${term.employee.getCpf}"></span>, doravante denominado COMODATÁRIO, declaro para
+					todos os fins de direito estar ciente da política de Solicitação de Recursos de TI e ter recebido
+					nesta data
+					um equipamento cujas configurações estão detalhadas abaixo, pertencente ao GRUPO AGIS, estabelecido
+					na Avenida Angélica, nº 2163, 14º andar, conjunto 145, Consolação, na cidade de São Paulo, Estado de
+					São Paulo, inscrito no
+					CNPJ/MF sob nº 31.023.023/0001-45 e filial estabelecida na Rua Marcos Macedo, nº 1333, sala 807,
+					Aldeota, na cidade de Fortaleza, estado do Ceará, inscrita no CNPJ/MF sob o nº 31.023.023/0002-26,
+					doravante denominada COMODANTE, ficando o referido equipamento sob minha responsabilidade até a data
+					em que a COMODANTE solicitar sua devolução ou quando o vínculo de trabalho ou prestação de serviço,
+					por qualquer motivo, finalizar ou encerrar, estando ciente que a não devolução ou eventuais danos do
+					equipamento e/ou acessório automaticamente autoriza ao CONSÓRCIO FTS (LINHA LESTE) a descontar valor
+					pertinente a reposição ou manutenção, através de desconto em folha (funcionário) ou mediante a
+					retenção do respectivo valor da contraprestação pecuniária aos serviços prestados (prestador de
+					serviços).
+				</p>
 
-        <div class="row pt-5 mt-5">
-
-            <div class="col">
-                <h2 th:text="${term.id}">id</h2>
-            </div>
-
-        </div>
-
-
-    </div>
-
-    <!-- <th:block th:each="equip: ${term.listOfEquipments}">
-							<td th:text="|[${equip.equipmentType}: ${equip.serialNumber}]|"></td>
-						</th:block> -->
-
-    <div th:replace="fragments :: footer"></div>
-
-    <footer class="container border-top mt-3 fixed-bottom">
-		<div class="d-flex justify-content-center align-items-center py-3">
-			<div class="mx-3">
-				<a href="https://github.com/claydiberto/"> <svg xmlns="http://www.w3.org/2000/svg" width="30"
-						height="30" fill="black" class="bi bi-github" viewBox="0 0 16 16">
-						<path
-							d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
-					</svg>
-				</a>
+				<p>
+					O COMODATÁRIO conforme política de utilização dos recursos de TI da COMODANTE, sendo
+					obrigatório ao COMODATÁRIO manter os equipamentos em perfeito funcionamento durante o horário de
+					trabalho.
+					Caso seja constatado mau uso ou avarias indevidas no equipamento disponibilizado, a COMODANTE
+					reserva-se o direito de solicitar o ressarcimento do valor excessivo do respectivo COMODATÁRIO.
+					Não é permitido armazenamento de informações (documentos, planilhas, fotos, músicas, etc.) que não
+					sejam de uso corporativo, sendo o COMODATÁRIO responsável pelos eventuais dados armazenados e seu
+					conteúdo.
+					O COMODATÁRIO não poderá vender o equipamento, emprestá-lo, transferi-lo, alugá-lo ou cedê-lo a
+					terceiros (pessoas físicas ou jurídicas).
+					A responsabilidade por eventuais manutenções, roubo, furto ou perda do equipamento é exclusivo do
+					COMODATÁRIO e no ato da devolução a equipe de TI, verificará o equipamento, preencherá e assinará o
+					termo de devolução. Caso na devolução o equipamento esteja danificado e seja constatado o mau uso,
+					fica o COMODATARIO passível de ressarcir à COMODANTE o valor do equipamento e/ou acessório, sem
+					depreciação, tendo como base o valor de mercado do equipamento disponibilizado, modelo similar caso
+					o anterior não seja mais produzido.
+				</p>
 			</div>
-			<span class="text-muted">&copy; 2022 Antonio Claydiberto</span>
 		</div>
-	</footer>
+
+		<div>
+			<div class="row justify-content-center pt-2">
+				<div class="col-auto m-3">
+					<div class="row table-responsive">
+						<table class="table table-hover align-middle">
+							<caption class="caption p-2">Equipamento(s)</caption>
+							<thead class="table-light">
+								<tr>
+									<td scope="col">Fabricante</td>
+									<td scope="col">Número de série</td>
+									<td scope="col">Tipo de equipamento</td>
+									<td scope="col">Modelo</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="equip: ${term.listOfEquipments}">
+									<td th:text="${equip.getFabricator}">fab</td>
+									<td th:text="${equip.getSerialNumber}">sn</td>
+									<td th:text="${equip.getEquipmentType}">type</td>
+									<td th:text="${equip.getModel}">model</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="col-auto m-3">
+					<div class="row table-responsive">
+						<table class="table table-hover align-middle">
+							<caption class="caption p-2">Periférico(s)</caption>
+							<tr th:each="peripheral: ${term.listOfPeripherals}">
+								<td scope="row" th:text="${peripheral.getName}">MOUSE</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="row justify-content-center pt-5">
+				<div class="col-auto border border-secondary rounded p-3">
+					<div class="row justify-content-between mb-2">
+						<div class="col-auto">
+							<label class="bold">TERMO: </label>
+							<span th:text="${term.getId}">20</span>
+						</div>
+						<div class="col-auto">
+							<span class="bold">STATUS: </span>
+							<span th:text="${term.getTermStatus}">ENTREGUE</span>
+						</div>
+
+						<div class="col-auto">
+							<span class="bold">DATA: </span>
+							<span th:text="${#temporals.format(term.moment, 'dd/MM/yyyy')}">22/12/2022</span>
+						</div>
+					</div>
+
+					<div class="row p-2">
+						<div class="col-auto border">
+							<div class="row justify-content-center">
+								<div class="col-auto">
+									<img class="imgSign" th:src="${term.getAnalystSubscription}">
+								</div>
+							</div>
+							<div class="row justify-content-center">
+								<div class="col-auto">
+									<span class="termData" th:text="${term.analyst.getName}">ANTONIO CLAYDIBERTO
+										ALBUQUERQUE DO
+										NASCIMENTO</span>
+								</div>
+							</div>
+							<div class="row justify-content-center">
+								<div class="col-auto">
+									<p>(ANALISTA TI)</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-auto"></div>
+
+						<div class="col-auto border">
+							<div class="row justify-content-center">
+								<div class="col-auto">
+									<img class="imgSign" th:src="${term.getEmployeeSubscription}">
+								</div>
+							</div>
+							<div class="row justify-content-center">
+								<div class="col-auto">
+									<span class="termData" th:text="${term.employee.getName}">ANTONIO CLAYDIBERTO
+										ALBUQUERQUE DO
+										NASCIMENTO</span>
+								</div>
+							</div>
+							<div class="row justify-content-center">
+								<div class="col-auto">
+									<p>(COLABORADOR)</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row justify-content-center pt-5 d-print-none">
+			<div class="col-auto">
+				<a th:href="@{/term/retunr/{id}(id=${term.id})}" class="btn btn-success">Devolver</a>
+			</div>
+		</div>
+		
+	</div>
+
+	<div th:replace="fragments :: footer"></div>
 
 </body>
 

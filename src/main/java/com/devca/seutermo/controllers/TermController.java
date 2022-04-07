@@ -95,7 +95,7 @@ public class TermController {
 	
 	@GetMapping("/term/details/{id}")
 	public String termDetails(@PathVariable("id") Long id, Model model) {		
-		model.addAttribute("term", this.service.findById(id) );
+		model.addAttribute("term", this.service.findById(id));
 		return "term-detail";
 	}	
 

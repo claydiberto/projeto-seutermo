@@ -1,0 +1,39 @@
+#term-detail {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+p {
+    font-size: 10px;
+}
+
+span {
+    font-weight: 11px;
+    font-weight: bold;
+}
+
+td {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.caption {
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+    caption-side: top;
+    text-align: center;
+    background: #bbbbbb;
+}
+
+.termData {
+    font-size: 11px;
+}
+
+.imgSign {
+    width: 250px;
+    height: 100px;
+}
