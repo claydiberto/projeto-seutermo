@@ -16,15 +16,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_analyst")
-public class Analyst {
-
+@Table(name = "tb_locality")
+public class Locality {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String name;
-	private String email;
-	private String password;
-	
+	private String cnpj;
+	private String cep;
+	private String address;
+	private String district;
+
 }

@@ -24,19 +24,19 @@
 					<tr>
 						<th scope="col">ID</th>
 						<td scope="col">Entregue</td>
+						<td scope="col">Localidade</td>
 						<td scope="col">Analista</td>
 						<td scope="col">Colaborador</td>
-						<td scope="col">Status</td>
 						<td scope="col">Detalhes</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="term: ${termList}">
 						<th th:text="${term.id}" scope="row"></th>
-						<td th:text="${#temporals.format(term.moment, 'dd/MM/yyyy - HH:mm')}"></td>
+						<td th:text="${#temporals.format(term.delivery.instant, 'dd/MM/yyyy - HH:mm')}"></td>
+						<td th:text="${term.locality.getName}"></td>
 						<td th:text="${term.analyst.getName}"></td>
 						<td th:text="${term.employee.getName}"></td>						
-						<td th:text="${term.termStatus}"></td>
 						<td>
 							<a th:href="@{/term/details/{id}(id=${term.id})}" class="btn btn-success">Abrir</a>
 						</td>

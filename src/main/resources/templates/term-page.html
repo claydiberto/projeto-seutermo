@@ -22,10 +22,20 @@
 			<form th:action="@{/saveTerm}" th:object="${termDTO}" method="post"
 				class="col-10 col-md-8 col-lg-6 col-xl-6">
 
+				<input type="hidden" th:field="*{statusEquipmentOnTerm}" value="DELIVERY" />
+
+				<div class="mb-3">
+                    <label for="dropLocality" class="form-label">Localidade</label>
+                    <select name="dropLocality" class="form-control" th:field=*{locality}>
+                        <option th:each="locality : ${localityList}" th:value="${locality.getId}"
+                            th:text="${locality.getName}"></option>
+                    </select>
+                </div>
+
 				<div class="mb-3">
 					<label for="dropAnalysts" class="form-label">Analista</label>
 					<select name="dropAnalysts" class="form-control" th:field=*{analyst}>
-						<option th:each="analyst : ${analystList}" th:value="${analyst.getEmail}"
+						<option th:each="analyst : ${analystList}" th:value="${analyst.getId}"
 							th:text="${analyst.getEmail}"></option>
 					</select>
 				</div>
@@ -33,25 +43,25 @@
 				<div class="mb-3">
 					<label for="dropEmployess" class="form-label">Colaborador</label>
 					<select name="dropEmployess" class="form-control" th:field=*{employee}>
-						<option th:each="employee : ${employeeList}" th:value="${employee.getEmail}"
+						<option th:each="employee : ${employeeList}" th:value="${employee.getId}"
 							th:text="${employee.getEmail}"></option>
 					</select>
 				</div>
 
 				<div class="mb-3 form-group">
 					<label for="checkEquipments" class="form-label">Equipamentos</label>
-					<select name="checkEquipments" class="form-control selectpicker" th:field=*{listOfEquipments}
+					<select name="checkEquipments" class="form-control selectpicker" th:field=*{equipments}
 						multiple data-live-search="true">
-						<option th:each="equipment : ${equipmentList}" th:value="${equipment.id}"
+						<option th:each="equipment : ${equipmentList}" th:value="${equipment.getId}"
 							th:text="|${equipment.equipmentType} - ${equipment.serialNumber}|"></option>
 					</select>
 				</div>
 
 				<div class="mb-3 form-group">
 					<label for="checkPeripherals" class="form-label">Periféricos</label>
-					<select name="checkPeripherals" class="form-control selectpicker" th:field=*{listOfPeripherals}
+					<select name="checkPeripherals" class="form-control selectpicker" th:field=*{peripherals}
 						multiple data-live-search="true">
-						<option th:each="peripheral : ${peripheralList}" th:value="${peripheral.id}"
+						<option th:each="peripheral : ${peripheralList}" th:value="${peripheral.getId}"
 							th:text="${peripheral.getName}"></option>
 					</select>
 				</div>

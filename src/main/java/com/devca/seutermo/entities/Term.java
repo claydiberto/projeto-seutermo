@@ -1,10 +1,8 @@
 package com.devca.seutermo.entities;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,12 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.devca.seutermo.entities.enums.TermStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -47,32 +44,31 @@ public class Term {
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
-
-	@Lob
-	@Basic(fetch = FetchType.LAZY)
-	private String employeeSubscription;
-
-	@Lob
-	@Basic(fetch = FetchType.LAZY)
-	private String analystSubscription;
-
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "tb_term_equipment", joinColumns = @JoinColumn(name = "term_id"), inverseJoinColumns = @JoinColumn(name = "equipment_id"))
-	private List<Equipment> listOfEquipments = new ArrayList<>();
-
+	
+	@OneToMany
+	@JoinColumn(name = "term_id")
+	private List<EquipmentTerm> equipments = new ArrayList<>();
+	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "tb_term_peripherals", joinColumns = @JoinColumn(name = "term_id"), inverseJoinColumns = @JoinColumn(name = "peripheral_id"))
-	private List<Peripheral> listOfPeripherals = new ArrayList<>();
-
-	private LocalDateTime moment;
-	private TermStatus termStatus;
-
-	public void addEquipment(Equipment equipment) {
-		getListOfEquipments().add(equipment);
-	}
-
+	private List<Peripheral> peripherals = new ArrayList<>();
+	
+	@ManyToOne
+	@JoinColumn(name = "locality_id")
+	private Locality locality;
+	
+	@OneToOne
+	private TermOperation delivery;
+	
+	@OneToOne
+	private TermOperation devolution;
+	
 	public void addPeripheral(Peripheral peripheral) {
-		getListOfPeripherals().add(peripheral);
+		getPeripherals().add(peripheral);
+	}
+	
+	public void addEquipment(EquipmentTerm equipmentTerm) {
+		getEquipments().add(equipmentTerm);
 	}
 
 }

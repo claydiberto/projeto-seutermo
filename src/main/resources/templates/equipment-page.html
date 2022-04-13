@@ -26,7 +26,7 @@
                 <div class="mb-3">
                     <label for="dropEquipmentType" class="form-label">Tipo</label>
                     <select name="dropEquipmentType" class="form-control" th:field=*{equipmentType}>
-                        <option th:each="typeOpt : ${T(com.devca.seutermo.entities.enums.EquipmentType).values()}"
+                        <option th:each="typeOpt : ${T(com.devca.seutermo.enums.EquipmentType).values()}"
                             th:value="${typeOpt}" th:text="${typeOpt}"></option>
                     </select>
                 </div>
@@ -52,7 +52,7 @@
                 <div class="mb-3">
                     <label for="dropEquipmentStatus" class="form-label">Status</label>
                     <select name="dropEquipmentStatus" class="form-control" th:field=*{equipmentStatus}>
-                        <option th:each="statusOpt : ${T(com.devca.seutermo.entities.enums.EquipmentStatus).values()}"
+                        <option th:each="statusOpt : ${T(com.devca.seutermo.enums.EquipmentStatus).values()}"
                             th:value="${statusOpt}" th:text="${statusOpt}"></option>
                     </select>
                 </div>

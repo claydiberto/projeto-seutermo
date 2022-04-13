@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<title>Localities</title>
+	<div th:replace="fragments :: header"></div>
+</head>
+
+<body>
+
+	<div th:replace="fragments :: navbar"></div>
+
+	<div class="container">
+
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-10 col-lg-10 col-xl-10 mt-5">
+
+				<div class="row justify-content-center pt-5">
+					<div class="col-auto border border-secondary rounded p-1">
+						<form th:action="@{/saveLocality}" th:object="${locality}" method="post">
+							<input type="hidden" th:field="*{id}" />
+
+							<div class="row justify-content-center p-2">
+								<h4 class="col-auto">Adicionar Localidade</h4>
+							</div>
+
+							<div class="row justify-content-center p-2">
+								<div class="col-auto">
+									<input type="text" class="form-control" th:field=*{name} placeholder="Nome"
+										oninput="this.value = this.value.toUpperCase()" />
+								</div>
+								<div class="col-auto">
+									<input type="text" class="form-control" th:field=*{cnpj} placeholder="CNPJ"
+										oninput="this.value = this.value.toUpperCase()" />
+								</div>
+							</div>
+
+							<div class="row justify-content-center p-2">
+								<div class="col">
+									<input type="text" class="form-control" th:field=*{address} placeholder="Endereço"
+										oninput="this.value = this.value.toUpperCase()" />
+								</div>
+							</div>
+
+							<div class="row justify-content-center p-2">
+								<div class="col-auto">
+									<input type="text" class="form-control" th:field=*{district} placeholder="Bairro"
+										oninput="this.value = this.value.toUpperCase()" />
+								</div>
+								<div class="col-auto">
+									<input type="text" class="form-control" th:field=*{cep} placeholder="CEP"
+										oninput="this.value = this.value.toUpperCase()" />
+								</div>
+							</div>
+
+							<div class="row justify-content-end p-2">
+								<div class="col-auto">
+									<button class="btn btn-success" type="submit">Salvar</button>
+								</div>
+							</div>
+
+						</form>
+					</div>
+				</div>
+
+				<div class="row justify-content-center pt-5">
+					<div class="col-auto">
+
+						<div class="row">
+							<h4 class="col-auto">Lista de localidades</h4>
+						</div>
+
+						<div class="row table-responsive">
+							<table class="table table-hover align-middle">
+								<thead class="table-light">
+									<tr>
+										<th scope="col">ID</th>
+										<td scope="col">Localidade</td>
+										<td scope="col">CNPJ</td>
+										<td scope="col">Endereço</td>
+										<td scope="col">Bairro</td>
+										<td scope="col">CEP</td>
+										<td scope="col">Remover</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="locality: ${localityList}">
+										<th th:text="${locality.id}" scope="row"></th>
+										<td th:text="${locality.name}"></td>
+										<td th:text="${locality.cnpj}"></td>
+										<td th:text="${locality.address}"></td>
+										<td th:text="${locality.district}"></td>
+										<td th:text="${locality.cep}"></td>
+										<td>
+											<a th:href="@{/deleteLocality/{id}(id=${locality.id})}"
+												class="btn btn-danger">Remover</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+	<div th:replace="fragments :: footer"></div>
+
+</body>
+
+</html>

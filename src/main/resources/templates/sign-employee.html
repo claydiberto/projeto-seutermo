@@ -29,9 +29,9 @@
 	</div>
 
 	<div>
-		<form th:action="@{/saveSignEmployee}" id="formSign" th:object="${termDTO}" method="post">
-			<input type="hidden" th:field="*{id}" />
-			<input type="hidden" th:field="*{employeeSubscription}" id="fieldSign" />
+		<form th:action="@{/saveSignEmployee}" id="formSign" th:object="${signDTO}" method="post">
+			<input type="hidden" th:field="*{termId}" value="${termId}" />
+			<input type="hidden" th:field="*{signature}" id="fieldSign" />
 		</form>
 	</div>
 

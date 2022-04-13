@@ -25,7 +25,6 @@
 						<th scope="col">ID</th>
 						<td scope="col">Nome</td>
 						<td scope="col">Email</td>
-						<td scope="col">Localidade</td>
 						<td scope="col">Ações</td>
 					</tr>
 				</thead>
@@ -34,7 +33,6 @@
 						<th th:text="${analyst.id}" scope="row"></th>
 						<td th:text="${analyst.name}"></td>
 						<td th:text="${analyst.email}"></td>
-						<td th:text="${analyst.locality}"></td>
 						<td>
 							<a th:href="@{/analyst/{id}(id=${analyst.id})}" class="btn btn-success">Editar</a>
 							<a th:href="@{/deleteAnalyst/{id}(id=${analyst.id})}"

@@ -1,17 +1,20 @@
 package com.devca.seutermo.services;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.devca.seutermo.dto.TermDTO;
+import com.devca.seutermo.dto.TermDetailsDTO;
 import com.devca.seutermo.entities.Equipment;
+import com.devca.seutermo.entities.EquipmentTerm;
 import com.devca.seutermo.entities.Peripheral;
 import com.devca.seutermo.entities.Term;
-import com.devca.seutermo.entities.TermDTO;
-import com.devca.seutermo.entities.enums.EquipmentStatus;
-import com.devca.seutermo.entities.enums.TermStatus;
+import com.devca.seutermo.entities.TermOperation;
+import com.devca.seutermo.enums.EquipmentStatus;
+import com.devca.seutermo.enums.OperationType;
+import com.devca.seutermo.repositories.EquipmentTermRepository;
 import com.devca.seutermo.repositories.TermRepository;
 
 @Service
@@ -21,16 +24,24 @@ public class TermService {
 	private TermRepository repository;
 	
 	@Autowired
-	private EquipmentService equipmentService;
-	
+	private EquipmentTermRepository equipmentTermRepository;
+		
 	@Autowired
 	private AnalystService analystService;
 	
 	@Autowired
 	private EmployeeService employeeService;
+
+	@Autowired
+	private EquipmentService equipmentService;
 	
 	@Autowired
-	private PeripheralService peripheralService;
+	private LocalityService localityService;
+	
+	public Term getTerm() {
+		Term term = new Term();
+		return term;
+	}
 		
 	public List<Term> findAll() {
 		return repository.findAll();
@@ -40,52 +51,76 @@ public class TermService {
 		return repository.findById(id).get();
 	}
 	
-	public Term getTerm() {
-		Term term = new Term();
-		return term;
-	}
-	
-	public Long save(TermDTO termDTO) {
-		Term term = getTerm(); 
-		term.setAnalyst(analystService.findByEmail(termDTO.getAnalyst()));
-		term.setEmployee(employeeService.findByEmail(termDTO.getEmployee()));
-		term.setTermStatus(TermStatus.ENTREGUE);
-		term.setMoment(LocalDateTime.now());
+	public Long saveNewTerm(TermDTO dto) {
+		Term term = getTerm();
 		
-		for (Equipment equipmentId : termDTO.getListOfEquipments()) {
-			Equipment equipment = equipmentService.findById(equipmentId.getId());
-			term.addEquipment(equipment);
-			equipmentService.changeStatus(equipment, EquipmentStatus.EMPRESTADO);
-		}
+		term.setAnalyst(analystService.findById(dto.getAnalyst()));
+		term.setEmployee(employeeService.findById(dto.getEmployee()));
+		term.setLocality(localityService.findById(dto.getLocality()));
 		
-		for (Peripheral peripheralId : termDTO.getListOfPeripherals()) {
-			Peripheral peripheral = peripheralService.findById(peripheralId.getId());
+		for (Peripheral peripheral : dto.getPeripherals()) {
 			term.addPeripheral(peripheral);
 		}
 		
-		repository.save(term);
+		term = repository.saveAndFlush(term);
+		
+		for (Equipment equipment : dto.getEquipments()) {
+			EquipmentTerm et = new EquipmentTerm();
+			et.setTerm(term);
+			et.setEquipment(equipment);
+			et.setStatusEquipmentOnTerm(OperationType.DELIVERY);
+			
+			et = equipmentTermRepository.saveAndFlush(et);
+			term.addEquipment(et);
+			repository.save(term);
+		}
+		
 		return term.getId();
 	}
 	
-	public void saveSign(TermDTO termDTO, String signOwner) {
-		Term term = findById(termDTO.getId());
+	public void saveOperationDelivery(Long termId, TermOperation termOperation) {
+		Term term = findById(termId);
+		term.setDelivery(termOperation);
+		repository.save(term);
 		
-		if (signOwner == "employee") {
-			term.setEmployeeSubscription(termDTO.getEmployeeSubscription());
-		}  else if (signOwner == "analyst") {
-			term.setAnalystSubscription(termDTO.getAnalystSubscription());
+		for (EquipmentTerm equipmentTerm : term.getEquipments()) {
+			Equipment equipment = equipmentTerm.getId().getEquipment();
+			equipmentService.changeStatus(equipment, EquipmentStatus.EMPRESTADO);
+		}
+	}
+
+	public TermDetailsDTO getTermDetail(Term term) {
+		TermDetailsDTO dto = new TermDetailsDTO();
+		
+		dto.setId(term.getId());
+		dto.setAnalyst(term.getAnalyst().getName());
+		dto.setEmployeeName(term.getEmployee().getName());
+		dto.setEmployeeEmail(term.getEmployee().getEmail());
+		dto.setEmployeeCpf(term.getEmployee().getCpf());
+		dto.setLocalityCnpj(term.getLocality().getCnpj());
+		dto.setLocalityAddress(term.getLocality().getAddress());
+		dto.setLocalityDistrict(term.getLocality().getDistrict());
+		dto.setLocalityCep(term.getLocality().getCep());
+		dto.setDeliveryInstant(term.getDelivery().getInstant());
+		dto.setDeliverySignAnalyst(term.getDelivery().getAnalystSignature());
+		dto.setDeliverySignEmployee(term.getDelivery().getEmployeeSignature());
+		
+		for (EquipmentTerm et : term.getEquipments()) {
+			if (et.getStatusEquipmentOnTerm().equals(OperationType.DELIVERY)) {
+				dto.addDeliveryEquipment(et.getId().getEquipment());				
+			} else {
+				dto.addDevolutionEquipment(et.getId().getEquipment());
+			}
 		}
 		
-		repository.save(term);
+		for (Peripheral peripheral : term.getPeripherals()) {
+			dto.addPeripheral(peripheral);
+		}
+		
+		return dto;
 	}
 	
-	public Boolean delete(Long id) {
-		try {
-			repository.deleteById(id);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
-	 
+	public void saveDevolution() {}
+	
+
 }

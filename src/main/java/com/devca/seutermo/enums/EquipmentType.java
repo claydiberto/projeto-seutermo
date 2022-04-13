@@ -1,4 +1,4 @@
-package com.devca.seutermo.entities.enums;
+package com.devca.seutermo.enums;
 
 public enum EquipmentType {
 	
