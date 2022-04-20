@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 import com.devca.seutermo.dto.SignDTO;
 import com.devca.seutermo.entities.TermOperation;
 import com.devca.seutermo.enums.OperationType;
-import com.devca.seutermo.repositories.TermOperaionRepository;
+import com.devca.seutermo.repositories.TermOperationRepository;
 
 @Service
 public class TermOperationService {
 	
 	@Autowired
-	private TermOperaionRepository repository;
+	private TermOperationRepository repository;
 
 	public TermOperation findById(Long id) {
 		return repository.findById(id).get();
@@ -29,20 +29,24 @@ public class TermOperationService {
 		return termOperation;
 	}
 
-	public TermOperation saveSignEmployee(SignDTO signDTO) {
+	public Long saveSignEmployee(SignDTO signDTO) {
 		TermOperation termOperation = getTermOperation();
 		termOperation.setEmployeeSignature(signDTO.getSignature());
-		termOperation = repository.saveAndFlush(termOperation);
-		return termOperation;
+		
+		if (signDTO.getOperation().equals("delivery")) {
+			termOperation.setOperationType(OperationType.DELIVERY);
+		} else {
+			termOperation.setOperationType(OperationType.DEVOLUTION);
+		}
+		
+		return repository.saveAndFlush(termOperation).getId();
 	}
 
 	public TermOperation saveSignAnalyst(SignDTO signDTO) {
 		TermOperation termOperation = findById(signDTO.getTermOperationId());
 		termOperation.setAnalystSignature(signDTO.getSignature());
-		termOperation.setOperationType(OperationType.DELIVERY);
 		termOperation.setInstant(LocalDateTime.now());
 		return repository.saveAndFlush(termOperation);
-		
 	}
 	
 }

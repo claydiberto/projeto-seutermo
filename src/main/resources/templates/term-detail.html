@@ -17,7 +17,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+
 	<script type="text/javascript">
 		function toUpper(param) {
 			return param.toUpperCase();
@@ -34,8 +38,8 @@
 
 	<nav class="navbar navbar-expand-md fixed-top navbar-light bg-light d-print-none">
 		<div class="container-fluid">
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
-				aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+				aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
@@ -64,7 +68,9 @@
 		</div>
 	</nav>
 
-	<div class="container mt-5 pt-2" id="term-detail">
+	<div class="containet mb-5 pb-5 d-print-none"></div>
+
+	<div class="container" id="term-detail">
 
 		<div class="row justify-content-between mt-1">
 			<div class="col-auto">
@@ -120,15 +126,15 @@
 			</div>
 		</div>
 
-		<div class="row justify-content border border-secondary rounded mt-3">
+		<div class="row justify-content border border-secondary rounded mt-1">
 			<div class="col">
 				<div class="row justify-content-between border rounded">
-					<div class="col-auto p-2">
-						<span class="bold">ENTREGA</span>
+					<div class="col-auto p-1">
+						<span class="title">ENTREGA</span>
 					</div>
-					<div class="col-auto p-2">
-						<span class="bold">DATA: </span>
-						<span th:text="${#temporals.format(term.deliveryInstant, 'dd/MM/yyyy')}"></span>
+					<div class="col-auto p-1">
+						<span class="title">DATA: </span>
+						<span class="title" th:text="${#temporals.format(term?.deliveryInstant, 'dd/MM/yyyy')}"></span>
 					</div>
 				</div>
 				<div class="row justify-content-between table-responsive pt-1">
@@ -210,12 +216,12 @@
 			th:if="${!term.devolutionEquipments.isEmpty()}">
 			<div class="col">
 				<div class="row justify-content-between border rounded">
-					<div class="col-auto p-2">
-						<span class="bold">DEVOLUÇÃO</span>
+					<div class="col-auto p-1">
+						<span class="title">DEVOLUÇÃO</span>
 					</div>
-					<div class="col-auto p-2">
-						<span class="bold">DATA: </span>
-						<span th:text="${#temporals.format(term?.devolutionInstant, 'dd/MM/yyyy')}"></span>
+					<div class="col-auto p-1">
+						<span class="title">DATA: </span>
+						<span class="title" th:text="${#temporals.format(term?.devolutionInstant, 'dd/MM/yyyy')}"></span>
 					</div>
 				</div>
 				<div class="row justify-content-between table-responsive pt-1">
@@ -242,7 +248,6 @@
 					</div>
 
 					<div class="col-auto">
-
 					</div>
 				</div>
 
@@ -286,12 +291,11 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
 
 		<div class="row justify-content-center d-print-none mt-5 mb-5 pb-5">
 			<div class="col-auto">
-				<a th:href="@{/term/retunr/{id}(id=${term.id})}" class="btn btn-success">Devolver</a>
+				<a th:href="@{/term/return/{id}(id=${term.id})}" class="btn btn-success">Devolver</a>
 			</div>
 		</div>
 

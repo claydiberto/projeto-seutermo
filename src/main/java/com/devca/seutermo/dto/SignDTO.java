@@ -14,9 +14,11 @@ public class SignDTO {
 	private Long termId;
 	private Long termOperationId;
 	private String signature;
+	private String operation;
 	
-	public SignDTO(Long termId) {
+	public SignDTO(Long termId, String operation) {
 		this.termId = termId;
+		this.operation = operation;
 	}
 
 }

@@ -8,9 +8,7 @@ import com.devca.seutermo.dto.TermDTO;
 public class TermDTOService {
 	
 	public TermDTO getTermDTO() {
-		TermDTO dto = new TermDTO();
-		return dto;
+		return new TermDTO();
 	}
-	
 	
 }

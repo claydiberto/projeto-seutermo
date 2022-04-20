@@ -9,12 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.devca.seutermo.dto.SignDTO;
 import com.devca.seutermo.dto.TermDTO;
-import com.devca.seutermo.dto.TermDetailsDTO;
-import com.devca.seutermo.entities.TermOperation;
 import com.devca.seutermo.services.AnalystService;
 import com.devca.seutermo.services.EmployeeService;
 import com.devca.seutermo.services.EquipmentService;
@@ -51,9 +50,13 @@ public class TermController {
 	@Autowired
 	private TermOperationService termOperationService;
 	
-	@GetMapping("/terms")
-	public String terms(Model model) {
-		model.addAttribute("termList", service.findAll());
+	@RequestMapping(path = {"/terms","/search"})
+	public String terms(Model model, String employeeName) {
+		if (employeeName != null) {
+			model.addAttribute("termList", service.findByEmployeeName(employeeName));
+		} else {
+			model.addAttribute("termList", service.findAll());
+		}
 		return "terms";
 	}
 	
@@ -74,42 +77,44 @@ public class TermController {
 			System.out.println(result.getFieldError());
 			return "/terms";
 		}
-		return "redirect:/signEmployee/" + service.saveNewTerm(termDTO);
+		return "redirect:/signEmployee/" + service.saveNewTerm(termDTO) + "/delivery";
 	}
 	
-	@GetMapping("/signEmployee/{termId}")
-	public String signEmployee(@PathVariable("termId") Long termId, Model model) {
-		SignDTO signDTO = new SignDTO(termId);
-		model.addAttribute("signDTO", signDTO);
+	@GetMapping("/signEmployee/{termId}/{operation}")
+	public String signEmployee(@PathVariable("termId") Long termId, @PathVariable("operation") String operation, Model model) {
+		model.addAttribute("signDTO", new SignDTO(termId, operation));
 		return "sign-employee";
 	}
 	
 	@PostMapping("/saveSignEmployee")
 	public String saveSignEmployee(@ModelAttribute("signDTO") SignDTO signDTO, RedirectAttributes attributes, Model model) {		
-		TermOperation termOperation = termOperationService.getTermOperation();
-		termOperation = termOperationService.saveSignEmployee(signDTO);
-		signDTO.setTermOperationId(termOperation.getId());
+		signDTO.setTermOperationId(termOperationService.saveSignEmployee(signDTO));
 		model.addAttribute("signDTO", signDTO);
 		return "sign-analyst";
 	}
 	
 	@PostMapping("/saveSignAnalyst")
 	public String saveSignAnalyst(@ModelAttribute("signDTO") SignDTO signDTO) {		
-		TermOperation termOperation = termOperationService.saveSignAnalyst(signDTO);
-		service.saveOperationDelivery(signDTO.getTermId(), termOperation);
+		service.saveOperation(signDTO.getTermId(), termOperationService.saveSignAnalyst(signDTO));
 		return "redirect:/terms"; 
 	}	
 	
 	@GetMapping("/term/details/{id}")
 	public String termDetails(@PathVariable("id") Long id, Model model) {
-		TermDetailsDTO dto = service.getTermDetail(service.findById(id));
-		model.addAttribute("term", dto);
+		model.addAttribute("term", service.getTermDetail(service.findById(id)));
 		return "term-detail";
 	}
 	
 	@GetMapping("/term/return/{id}")
-	public String returnTerm() {
-		return null;
+	public String returnTerm(@PathVariable("id") Long id, Model model) {		
+		model.addAttribute("termDTO", service.getTermDevolution(id));	
+		return "term-devolution";
+	}
+	
+	@PostMapping("/devolveTerm")
+	public String devolveTerm(@ModelAttribute("termDTO") TermDTO termDTO) {
+		service.saveDevolution(termDTO);
+		return "redirect:/signEmployee/" + termDTO.getId() + "/devolution";
 	}
 
 }

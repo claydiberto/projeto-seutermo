@@ -15,19 +15,20 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TermDTO {
+public class TermDevolutionDTO {
 	
 	private Long id;
-	private Long locality;
-//	private Long delivery;
-//	private Long devolution;
-	private Long analyst;
-	private Long employee;
-	private String statusEquipmentOnTerm;
+	private Long termOperationId;
+	private String signature;
+	private Boolean damagedEquipment;
 	
 	private List<Equipment> equipments = new ArrayList<>();	
 	private List<Peripheral> peripherals = new ArrayList<>();
-		
+	
+	public TermDevolutionDTO(Long id) {
+		this.id = id;
+	}
+	
 	public void addEquipment(Equipment equipment) {
 		getEquipments().add(equipment);
 	}

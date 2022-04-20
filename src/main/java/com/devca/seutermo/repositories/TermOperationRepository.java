@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.devca.seutermo.entities.TermOperation;
 
-public interface TermOperaionRepository extends JpaRepository<TermOperation, Long> {
+public interface TermOperationRepository extends JpaRepository<TermOperation, Long> {
 
 }
