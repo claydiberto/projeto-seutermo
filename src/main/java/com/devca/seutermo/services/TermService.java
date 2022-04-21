@@ -1,6 +1,7 @@
 package com.devca.seutermo.services;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -123,13 +124,20 @@ public class TermService {
 		dto.setLocalityCnpj(term.getLocality().getCnpj());
 		dto.setLocalityAddress(term.getLocality().getAddress());
 		dto.setLocalityDistrict(term.getLocality().getDistrict());
-		dto.setLocalityCep(term.getLocality().getCep());
+		dto.setLocalityZip(term.getLocality().getZip());
+		dto.setLocalityCity(term.getLocality().getCity());
+		dto.setLocalityUf(term.getLocality().getUf());
+		dto.setLocalityCompanyName(term.getLocality().getCompanyName());
+		dto.setLocalityNumber(term.getLocality().getNumber());
 		dto.setDeliveryInstant(term.getDelivery().getInstant());
 		dto.setDeliverySignAnalyst(term.getDelivery().getAnalystSignature());
 		dto.setDeliverySignEmployee(term.getDelivery().getEmployeeSignature());
-		dto.setDevolutionInstant(term.getDevolution().getInstant());
-		dto.setDevolutionSignAnalyst(term.getDevolution().getAnalystSignature());
-		dto.setDevolutionSignEmployee(term.getDevolution().getEmployeeSignature());
+		
+		if (!Objects.isNull(term.getDevolution()) ) {
+			dto.setDevolutionInstant(term.getDevolution().getInstant());
+			dto.setDevolutionSignAnalyst(term.getDevolution().getAnalystSignature());
+			dto.setDevolutionSignEmployee(term.getDevolution().getEmployeeSignature());
+		}
 		
 		for (EquipmentTerm et : term.getEquipments()) {
 			if (et.getStatusEquipmentOnTerm().equals(OperationType.DELIVERY)) {

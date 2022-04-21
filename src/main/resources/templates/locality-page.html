@@ -4,6 +4,78 @@
 <head>
 	<title>Localities</title>
 	<div th:replace="fragments :: header"></div>
+	<div th:replace="fragments :: maskInput"></div>
+
+	<!-- Search By ZipCode -->
+	<script type="text/javascript">
+
+		function limpa_formulário_cep() {
+			//Limpa valores do formulário de cep.
+			document.getElementById('address').value = ("");
+			document.getElementById('district').value = ("");
+			document.getElementById('city').value = ("");
+			document.getElementById('uf').value = ("");
+		}
+
+		function meu_callback(conteudo) {
+			if (!("erro" in conteudo)) {
+				//Atualiza os campos com os valores.
+				document.getElementById('address').value = (conteudo.logradouro);
+				document.getElementById('district').value = (conteudo.bairro);
+				document.getElementById('city').value = (conteudo.localidade);
+				document.getElementById('uf').value = (conteudo.uf);
+			} //end if.
+			else {
+				//CEP não Encontrado.
+				limpa_formulário_cep();
+				alert("CEP não encontrado.");
+			}
+		}
+
+		function pesquisacep(valor) {
+
+			//Nova variável "cep" somente com dígitos.
+			var cep = valor.replace(/\D/g, '');
+
+			//Verifica se campo cep possui valor informado.
+			if (cep != "") {
+
+				//Expressão regular para validar o CEP.
+				var validacep = /^[0-9]{8}$/;
+
+				//Valida o formato do CEP.
+				if (validacep.test(cep)) {
+
+					//Preenche os campos com "..." enquanto consulta webservice.
+					document.getElementById('address').value = "...";
+					document.getElementById('district').value = "...";
+					document.getElementById('city').value = "...";
+					document.getElementById('uf').value = "...";
+
+					//Cria um elemento javascript.
+					var script = document.createElement('script');
+
+					//Sincroniza com o callback.
+					script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+
+					//Insere script no documento e carrega o conteúdo.
+					document.body.appendChild(script);
+
+				} //end if.
+				else {
+					//cep é inválido.
+					limpa_formulário_cep();
+					alert("Formato de CEP inválido.");
+				}
+			} //end if.
+			else {
+				//cep sem valor, limpa formulário.
+				limpa_formulário_cep();
+			}
+		};
+
+	</script>
+
 </head>
 
 <body>
@@ -24,33 +96,57 @@
 								<h4 class="col-auto">Adicionar Localidade</h4>
 							</div>
 
-							<div class="row justify-content-center p-2">
+							<div class="row justify-content-between p-2">
 								<div class="col-auto">
 									<input type="text" class="form-control" th:field=*{name} placeholder="Nome"
 										oninput="this.value = this.value.toUpperCase()" />
 								</div>
 								<div class="col-auto">
-									<input type="text" class="form-control" th:field=*{cnpj} placeholder="CNPJ"
-										oninput="this.value = this.value.toUpperCase()" />
+									<input type="text" id="cnpj" class="form-control" th:field=*{cnpj}
+										placeholder="CNPJ" oninput="this.value = this.value.toUpperCase()" />
 								</div>
 							</div>
 
-							<div class="row justify-content-center p-2">
+							<div class="row justify-content-between p-2">
 								<div class="col">
-									<input type="text" class="form-control" th:field=*{address} placeholder="Endereço"
-										oninput="this.value = this.value.toUpperCase()" />
+									<input type="text" class="form-control" th:field=*{companyName}
+										placeholder="Razão Social" oninput="this.value = this.value.toUpperCase()" />
 								</div>
 							</div>
 
-							<div class="row justify-content-center p-2">
+							<div class="row justify-content-between p-2">
 								<div class="col-auto">
-									<input type="text" class="form-control" th:field=*{district} placeholder="Bairro"
-										oninput="this.value = this.value.toUpperCase()" />
+									<input type="text" id="zip" class="form-control" th:field=*{zip} placeholder="CEP"
+										oninput="this.value = this.value.toUpperCase()" maxlength="9"
+										onblur="pesquisacep(this.value);" />
 								</div>
 								<div class="col-auto">
-									<input type="text" class="form-control" th:field=*{cep} placeholder="CEP"
-										oninput="this.value = this.value.toUpperCase()" />
+									<input type="number" class="form-control" th:field=*{number} placeholder="Número"
+										size="5" maxlength="5" />
 								</div>
+							</div>
+
+							<div class="row justify-content-between p-2">
+								<div class="col">
+									<input type="text" id="address" class="form-control" th:field=*{address}
+										placeholder="Endereço" oninput="this.value = this.value.toUpperCase()" />
+								</div>
+								<div class="col-auto">
+									<input type="text" id="uf" class="form-control" th:field=*{uf} placeholder="UF"
+										oninput="this.value = this.value.toUpperCase()" size="2" />
+								</div>
+							</div>
+
+							<div class="row justify-content-between p-2">
+								<div class="col-auto">
+									<input type="text" id="district" class="form-control" th:field=*{district}
+										placeholder="Bairro" oninput="this.value = this.value.toUpperCase()" />
+								</div>
+								<div class="col-auto">
+									<input type="text" id="city" class="form-control" th:field=*{city}
+										placeholder="Cidade" oninput="this.value = this.value.toUpperCase()" />
+								</div>
+
 							</div>
 
 							<div class="row justify-content-end p-2">
@@ -78,7 +174,7 @@
 										<td scope="col">Localidade</td>
 										<td scope="col">CNPJ</td>
 										<td scope="col">Endereço</td>
-										<td scope="col">Bairro</td>
+										<td scope="col">UF</td>
 										<td scope="col">CEP</td>
 										<td scope="col">Remover</td>
 									</tr>
@@ -89,8 +185,8 @@
 										<td th:text="${locality.name}"></td>
 										<td th:text="${locality.cnpj}"></td>
 										<td th:text="${locality.address}"></td>
-										<td th:text="${locality.district}"></td>
-										<td th:text="${locality.cep}"></td>
+										<td th:text="${locality.uf}"></td>
+										<td th:text="${locality.zip}"></td>
 										<td>
 											<a th:href="@{/deleteLocality/{id}(id=${locality.id})}"
 												class="btn btn-danger">Remover</button>

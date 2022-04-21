@@ -4,6 +4,7 @@
 <head>
     <title>Employee</title>
     <div th:replace="fragments :: header"></div>
+    <div th:replace="fragments :: maskInput"></div>
 </head>
 
 <body>
@@ -37,7 +38,7 @@
 
                 <div class="mb-3">
                     <label for="cpf" class="form-label">CPF</label>
-                    <input type="text" class="form-control" th:field=*{cpf} name="cpf" />
+                    <input type="text" id="cpf" class="form-control" th:field=*{cpf} name="cpf" />
                 </div>
 
                 <div class="mb-3 row justify-content-between">

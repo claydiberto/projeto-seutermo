@@ -57,10 +57,14 @@ public class SeutermoApplication implements CommandLineRunner {
 		
 		Locality l1 = new Locality();
 		l1.setName("METROFOR");
-		l1.setAddress("RUA PADRE MORORÓ, 441");
-		l1.setCep("60010-100");
+		l1.setAddress("RUA PADRE MORORÓ");
+		l1.setZip("60010-100");
 		l1.setCnpj("31023023000126");
 		l1.setDistrict("MOURA BRASIL");
+		l1.setCity("Fortaleza");
+		l1.setUf("CE");
+		l1.setNumber(441);
+		l1.setCompanyName("CONSORCIO FTS (LINHA LESTE)");
 		
 		localityRepository.save(l1);
 		

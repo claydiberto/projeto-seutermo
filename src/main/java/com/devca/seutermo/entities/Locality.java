@@ -25,8 +25,12 @@ public class Locality {
 	
 	private String name;
 	private String cnpj;
-	private String cep;
+	private String companyName;
+	private String zip;
 	private String address;
+	private Integer number;
 	private String district;
+	private String city;
+	private String uf;
 
 }

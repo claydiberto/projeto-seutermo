@@ -24,7 +24,11 @@ public class TermDetailsDTO {
 	private String localityCnpj;
 	private String localityAddress;
 	private String localityDistrict;
-	private String localityCep;
+	private String localityZip;
+	private Integer localityNumber;
+	private String localityCity;
+	private String localityUf;
+	private String localityCompanyName;
 	private LocalDateTime deliveryInstant;
 	private String deliverySignAnalyst;
 	private String deliverySignEmployee;
