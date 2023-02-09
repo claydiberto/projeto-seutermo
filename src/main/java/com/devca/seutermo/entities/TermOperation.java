@@ -14,19 +14,11 @@ import javax.persistence.Table;
 
 import com.devca.seutermo.enums.OperationType;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-@ToString
 @Entity
 @Table(name = "tb_term_operation")
 public class TermOperation {

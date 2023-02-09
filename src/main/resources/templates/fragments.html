@@ -101,12 +101,14 @@
 		 *   http://www.gnu.org/licenses/gpl.html
 		 */
 
+		var widthScreen = window.screen.width;
+		
 		jQuery(document).ready(function (e) {
 			jQuery.fn.sign = function (options) {
 				var params = jQuery.fn.extend({
 					reset: options.resetButton ? options.resetButton : null,
-					width: options.width ? options.width : 500,
-					height: options.height ? options.height : 200,
+					width: options.width ? options.width : widthScreen, //500,
+					height: options.height ? options.height : (widthScreen/2), //200,
 					lineWidth: options.lineWidth ? options.lineWidth : 10,
 				}, options);
 
@@ -123,7 +125,7 @@
 				canvas.attr("height", params.height);
 
 				var points = [];
-				var last = { x: null, y: null };
+				var last = {x: null, y: null};
 				var holdClick = false;
 
 				var touch = function (e) {
@@ -134,7 +136,7 @@
 						touch = e;
 					}
 
-					return ({ x: touch.pageX, y: touch.pageY });
+					return ({x: touch.pageX, y: touch.pageY});
 				}
 
 				var getMousePosition = function (canvas, evt) {
@@ -147,7 +149,7 @@
 				}
 
 				var draw = function (ctx, x, y) {
-					points.push({ x: x, y: y, break: false });
+					points.push({x: x, y: y, break: false});
 					ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 					var p1 = points[0];
 					var p2 = points[1];
@@ -182,7 +184,7 @@
 				canvas.on('touchstart mousedown', function (e) {
 					holdClick = true;
 					var mousePosition = getMousePosition(canvas, e);
-					points.push({ x: mousePosition.x, y: mousePosition.y, break: false });
+					points.push({x: mousePosition.x, y: mousePosition.y, break: false});
 					return false;
 				}).on('touchmove mousemove', function (e) {
 					if (holdClick) {
@@ -238,7 +240,7 @@
 <div th:fragment="maskInput">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
-	
+
 	<script type="text/javascript">
 		$("#zip").mask("99999-999");
 		$("#cpf").mask("999.999.999-99");

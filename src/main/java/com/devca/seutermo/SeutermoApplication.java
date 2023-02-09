@@ -8,12 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.devca.seutermo.entities.Analyst;
 import com.devca.seutermo.entities.Employee;
 import com.devca.seutermo.entities.Equipment;
-import com.devca.seutermo.entities.EquipmentTerm;
 import com.devca.seutermo.entities.Locality;
 import com.devca.seutermo.entities.Peripheral;
-import com.devca.seutermo.entities.Term;
 import com.devca.seutermo.enums.EquipmentType;
-import com.devca.seutermo.enums.OperationType;
 import com.devca.seutermo.repositories.AnalystRepository;
 import com.devca.seutermo.repositories.EmployeeRepository;
 import com.devca.seutermo.repositories.EquipmentTermRepository;
@@ -30,8 +27,6 @@ public class SeutermoApplication implements CommandLineRunner {
 	
 	@Autowired
 	private EquipmentTermRepository equipmentTermRepository;
-	
-	
 	
 	@Autowired
 	private TermRepository repository;
@@ -127,25 +122,6 @@ public class SeutermoApplication implements CommandLineRunner {
 		p4.setId(4L);
 		p4.setName("CHARGER");
 		peripheralRepository.save(p4);
-		
-		Term term = new Term();
-		
-		term.setAnalyst(a1);
-		term.setEmployee(c2);
-		term.setLocality(l1);
-		term.addPeripheral(p4);
-		term.addPeripheral(p1);
-		term = repository.saveAndFlush(term);
-		
-		EquipmentTerm et = new EquipmentTerm();
-		et.setEquipment(e1);
-		et.setStatusEquipmentOnTerm(OperationType.DELIVERY);
-		et.setTerm(term);
-		et = equipmentTermRepository.saveAndFlush(et);
-		
-		term.addEquipment(et);
-		
-		repository.saveAndFlush(term);
 		
 	}
 

@@ -1,26 +1,15 @@
 package com.devca.seutermo.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.devca.seutermo.enums.EquipmentStatus;
 import com.devca.seutermo.enums.EquipmentType;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Entity
 @Table(name = "tb_equipment")
 public class Equipment {
@@ -37,6 +26,7 @@ public class Equipment {
 
 	private String fabricator;
 	private String model;
+	@Column(nullable = false, unique = true)
 	private String serialNumber;
 
 }

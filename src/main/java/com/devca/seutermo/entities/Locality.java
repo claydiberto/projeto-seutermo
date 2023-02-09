@@ -1,18 +1,10 @@
 package com.devca.seutermo.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -22,15 +14,26 @@ public class Locality {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
+	@Column(nullable = false)
 	private String name;
+
+	@Column(nullable = false)
 	private String cnpj;
+
+	@Column(nullable = false)
 	private String companyName;
+
+	@Column(nullable = false, unique = true)
 	private String zip;
 	private String address;
 	private Integer number;
 	private String district;
+
+	@Column(nullable = false)
 	private String city;
+
+	@Column(nullable = false)
 	private String uf;
 
 }

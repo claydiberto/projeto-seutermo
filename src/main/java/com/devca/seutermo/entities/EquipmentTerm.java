@@ -7,17 +7,11 @@ import javax.persistence.Table;
 
 import com.devca.seutermo.enums.OperationType;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Entity
 @Table(name = "tb_term_equipments")
 public class EquipmentTerm {

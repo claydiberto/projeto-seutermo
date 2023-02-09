@@ -12,7 +12,7 @@
 
 	<div class="container">
 
-		<div class="d-flex justify-content-center pt-5 pb-3 mt-3">
+		<div class="d-flex justify-content-center pt-3 pb-3 mt-3">
 			<h1>Lista de termos</h1>
 		</div>
 
@@ -36,7 +36,8 @@
 			</div>
 		</div>
 
-		<div class="row mt-5 table-responsive">
+		<div class="row mt-5 table-responsive"
+			th:if="${!termList.isEmpty()}">
 			<table class="table table-hover align-middle">
 				<thead class="table-light">
 					<tr>

@@ -112,7 +112,7 @@ public class TermService {
 		
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional
 	public TermDetailsDTO getTermDetail(Term term) {
 		TermDetailsDTO dto = new TermDetailsDTO();
 		
