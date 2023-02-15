@@ -1,53 +1,63 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
 
-<head>
-	<title>Analyst</title>
-	<div th:replace="fragments :: header"></div>
-</head>
+	<head>
+		<title>Analyst</title>
+		<div th:replace="fragments :: header"></div>
+		<link th:href="@{/css/styles.css}" rel="stylesheet" />
+	</head>
 
-<body>
+	<body>
 
-	<div th:replace="fragments :: navbar"></div>
+		<div th:replace="fragments :: navbar"></div>
 
-	<div class="container">
+		<div class="container">
 
-		<div class="d-flex justify-content-center pt-3 pb-3 mt-3">
-			<h1>Lista de analistas</h1>
+			<div class="d-flex justify-content-center pt-3 pb-3 mt-3">
+				<h1>Lista de analistas</h1>
+			</div>
+
+			<div class="d-flex justify-content-start mt-3 mb-5">
+				<a th:href="@{/analyst}" class="btn btn-primary">Adicionar Analista</a>
+			</div>
+
+			<div class="row mt-3 table-responsive">
+				<table class="table table-hover align-middle">
+					<thead class="table-light">
+						<tr>
+							<th scope="col">ID</th>
+							<td scope="col">
+								<input id="txtName" class="input-search" type="search" placeholder="Nome"
+									oninput="this.value = this.value.toUpperCase()" />
+							</td>
+							<td scope="col">
+								<input id="txtEmail" class="input-search" type="search" placeholder="Email"
+									oninput="this.value = this.value.toUpperCase()" />
+							</td>
+							<td scope="col">Ações</td>
+						</tr>
+					</thead>
+					<tbody id="tableData">
+						<tr th:each="analyst: ${analystList}">
+							<th th:text="${analyst.id}" scope="row"></th>
+							<td th:text="${analyst.name}"></td>
+							<td th:text="${analyst.email}"></td>
+							<td>
+								<a th:href="@{/analyst/{id}(id=${analyst.id})}" class="btn btn-success">Editar</a>
+								<a th:href="@{/deleteAnalyst/{id}(id=${analyst.id})}"
+									class="btn btn-danger">Remover</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+
 		</div>
 
-		<a th:href="@{/analyst}" class="btn btn-primary">Adicionar Analista</a>
+		<div th:replace="fragments :: footer"></div>
+		<div th:replace="fragments :: searchAnalystPage"></div>
 
-		<div class="row mt-3 table-responsive">
-			<table class="table table-hover align-middle">
-				<thead class="table-light">
-					<tr>
-						<th scope="col">ID</th>
-						<td scope="col">Nome</td>
-						<td scope="col">Email</td>
-						<td scope="col">Ações</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="analyst: ${analystList}">
-						<th th:text="${analyst.id}" scope="row"></th>
-						<td th:text="${analyst.name}"></td>
-						<td th:text="${analyst.email}"></td>
-						<td>
-							<a th:href="@{/analyst/{id}(id=${analyst.id})}" class="btn btn-success">Editar</a>
-							<a th:href="@{/deleteAnalyst/{id}(id=${analyst.id})}"
-								class="btn btn-danger">Remover</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-
-		</div>
-
-	</div>
-
-	<div th:replace="fragments :: footer"></div>
-
-</body>
+	</body>
 
 </html>

@@ -26,19 +26,17 @@
 
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome</label>
-                    <input type="text" class="form-control" th:field=*{name} name="name" 
-                    oninput="this.value = this.value.toUpperCase()" />
+                    <input type="text" class="form-control" th:field=*{name} name="name" oninput="this.value = this.value.toUpperCase()" />
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="text" class="form-control" th:field=*{email} name="email" 
-                    oninput="this.value = this.value.toUpperCase()" />
+                    <input type="text" class="form-control" th:field=*{email} name="email" oninput="this.value = this.value.toUpperCase()" />
                 </div>
 
                 <div class="mb-3">
                     <label for="cpf" class="form-label">CPF</label>
-                    <input type="text" id="cpf" class="form-control" th:field=*{cpf} name="cpf" />
+                    <input type="text" id="cpf" class="form-control maskCpf" th:field=*{cpf} name="cpf" />
                 </div>
 
                 <div class="mb-3 row justify-content-between">

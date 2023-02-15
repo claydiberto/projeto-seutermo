@@ -26,6 +26,7 @@ public class Equipment {
 
 	private String fabricator;
 	private String model;
+	
 	@Column(nullable = false, unique = true)
 	private String serialNumber;
 

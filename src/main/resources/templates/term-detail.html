@@ -69,7 +69,7 @@
 			</div>
 		</div>
 
-		<div class="row justify-content border border-secondary rounded mt-1">
+		<div class="row justify-content border border-secondary rounded mt-1 term">
 			<div class="col">
 				<div class="row justify-content-between border rounded">
 					<div class="col-auto p-1">
@@ -86,18 +86,18 @@
 							<caption class="caption p-2">Equipamento(s)</caption>
 							<thead class="table-light">
 								<tr>
-									<td scope="col">Fabricante</td>
-									<td scope="col">Tipo de equipamento</td>
-									<td scope="col">Modelo</td>
-									<td scope="col">Número de série</td>
+									<td class="term-detail-font" scope="col">Fabricante</td>
+									<td class="term-detail-font" scope="col">Tipo de equipamento</td>
+									<td class="term-detail-font" scope="col">Modelo</td>
+									<td class="term-detail-font" scope="col">Número de série</td>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="equip: ${term.deliveryEquipments}">
-									<td th:text="${equip.getFabricator}"></td>
-									<td th:text="${equip.getEquipmentType}"></td>
-									<td th:text="${equip.getModel}"></td>
-									<td th:text="${equip.getSerialNumber}"></td>
+									<td class="term-detail-font" th:text="${equip.getFabricator}"></td>
+									<td class="term-detail-font" th:text="${equip.getEquipmentType}"></td>
+									<td class="term-detail-font" th:text="${equip.getModel}"></td>
+									<td class="term-detail-font" th:text="${equip.getSerialNumber}"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -217,7 +217,7 @@
 					<div class="col-auto border rounded">
 						<div class="row justify-content-center">
 							<div class="col-auto">
-								<img class="imgSign" th:src="${term?.devolutionSignAnalyst}">
+								<img class="imgSign" th:src="${term?.devolutionSignEmployee}">
 							</div>
 						</div>
 						<div class="row justify-content-center">

@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,9 +59,19 @@ public class TermService {
 		return repository.findById(id).get();
 	}
 	
+	// @Transactional(readOnly = true)
+	// public List<Term> findByEmployeeName(String employeeName){
+	// 	return repository.findByEmployeeNameContainingIgnoreCase(employeeName);
+	// }
+
 	@Transactional(readOnly = true)
-	public List<Term> findByEmployeeName(String employeeName){
-		return repository.findByEmployeeNameContainingIgnoreCase(employeeName);
+	public Page<Term> getTermsPageable(int currentPage, int size, String employeeName) {
+		Pageable pageable = PageRequest.of(currentPage, size, Sort.by(Sort.Direction.DESC, "id"));
+		if (employeeName != null) {
+			return repository.findByEmployeeNameContainingIgnoreCaseOrderByIdDesc(pageable, employeeName);
+		} else {
+			return repository.findAll(pageable);
+		}
 	}
 	
 	@Transactional
