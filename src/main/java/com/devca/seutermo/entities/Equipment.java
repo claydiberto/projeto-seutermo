@@ -18,10 +18,10 @@ public class Equipment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private EquipmentType equipmentType;
 	
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private EquipmentStatus equipmentStatus = EquipmentStatus.DISPONIVEL;
 
 	private String fabricator;

@@ -10,37 +10,43 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.devca.seutermo.entities.Analyst;
 import com.devca.seutermo.services.AnalystService;
+import com.devca.seutermo.services.RoleService;
 
 @Controller
 public class AnalystController {
 
 	@Autowired
 	private AnalystService service;
-	
+
+	@Autowired
+	private RoleService roleService;
+
 	@GetMapping("/analysts")
 	public String analysts(Model model) {
 		model.addAttribute("analystList", service.findAll());
 		return "analysts";
 	}
-	
+
 	@GetMapping("/analyst")
 	public String insert(Model model) {
 		model.addAttribute("analyst", service.getAnalyst());
+		model.addAttribute("roleList", roleService.findAll());
 		return "analyst-page";
 	}
 
 	@GetMapping("/analyst/{id}")
 	public String update(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("analyst", service.findById(id));
+		model.addAttribute("roleList", roleService.findAll());
 		return "analyst-page";
 	}
-	
+
 	@PostMapping("/saveAnalyst")
-	public String save(@ModelAttribute("analyst") Analyst analyst) {		
+	public String save(@ModelAttribute("analyst") Analyst analyst) {
 		service.save(analyst);
 		return "redirect:/analysts";
 	}
-	
+
 	@GetMapping("/deleteAnalyst/{id}")
 	public String delete(@PathVariable("id") Long id) {
 		if (service.delete(id)) {
@@ -48,5 +54,5 @@ public class AnalystController {
 		} else
 			return "redirect:/";
 	}
-	
+
 }

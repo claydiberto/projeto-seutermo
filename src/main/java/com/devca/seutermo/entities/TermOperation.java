@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class TermOperation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private OperationType operationType;
 	
 	private LocalDateTime instant;

@@ -1,12 +1,13 @@
 package com.devca.seutermo.entities;
 
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import com.devca.seutermo.entities.enums.PeripheralsType;
 
 public class Peripherals {
 	
-	@Enumerated
+	@Enumerated()
 	private PeripheralsType peripheralsType;
 
 	public Peripherals() {

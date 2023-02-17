@@ -1,61 +1,73 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
 
-<head>
-    <title>Analyst</title>
-    <div th:replace="fragments :: header"></div>
-</head>
+    <head>
+        <title>Analyst</title>
+        <div th:replace="fragments :: header"></div>
+        <div th:replace="fragments :: selectPickerHeader"></div>
+    </head>
 
-<body>
+    <body>
 
-    <div th:replace="fragments :: navbar"></div>
+        <div th:replace="fragments :: navbar"></div>
 
-    <div class="container">
+        <div class="container">
 
-        <div class="d-flex justify-content-center pt-3 pb-3 mt-3">
-            <h1>Analista</h1>
+            <div class="d-flex justify-content-center pt-3 pb-3 mt-3">
+                <h1>Analista</h1>
+            </div>
+
+            <div class="row justify-content-center mt-3">
+
+                <form th:action="@{/saveAnalyst}" th:object="${analyst}" method="post"
+                    class="col-10 col-md-8 col-lg-6 col-xl-6">
+
+                    <input type="hidden" th:field="*{id}" />
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nome</label>
+                        <input type="text" class="form-control" th:field=*{name} name="name"
+                            oninput="this.value = this.value.toUpperCase()" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" class="form-control" th:field=*{email} name="email"
+                            oninput="this.value = this.value.toUpperCase()" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Senha</label>
+                        <input type="password" class="form-control" th:field=*{password} name="password" />
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label for="checkRoles" class="form-label">Perfil</label>
+                        <select name="checkRoles" class="form-control selectpicker" th:field=*{roles} multiple
+                            data-live-search="true">
+                            <div th:each="role : ${roleList}">
+                                <option th:value="${role.getId}" th:text="${role.getRoleName}"></option>
+                            </div>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 row justify-content-between">
+                        <div class="col-auto">
+                            <a class="btn btn-secondary" th:href="@{/analysts}">Cancelar</a>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-success">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
         </div>
 
-        <div class="row justify-content-center mt-3">
+        <div th:replace="fragments :: footer"></div>
+        <div th:replace="fragments :: selectPickerFooter"></div>
 
-            <form th:action="@{/saveAnalyst}" th:object="${analyst}" method="post"
-                class="col-10 col-md-8 col-lg-6 col-xl-6">
-
-                <input type="hidden" th:field="*{id}" />
-
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nome</label>
-                    <input type="text" class="form-control" th:field=*{name} name="name"
-                        oninput="this.value = this.value.toUpperCase()" />
-                </div>
-
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="text" class="form-control" th:field=*{email} name="email"
-                        oninput="this.value = this.value.toUpperCase()" />
-                </div>
-
-                <div class="mb-3">
-                    <label for="password" class="form-label">Senha</label>
-                    <input type="password" class="form-control" th:field=*{password} name="password" />
-                </div>
-
-                <div class="mb-3 row justify-content-between">
-                    <div class="col-auto">
-                        <a class="btn btn-secondary" th:href="@{/analysts}">Cancelar</a>
-                    </div>
-                    <div class="col-auto">
-                        <button type="submit" class="btn btn-success">Salvar</button>
-                    </div>
-                </div>
-            </form>
-
-        </div>
-
-    </div>
-
-    <div th:replace="fragments :: footer"></div>
-
-</body>
+    </body>
 
 </html>

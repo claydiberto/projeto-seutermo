@@ -19,20 +19,6 @@ public class EquipmentController {
 	@Autowired
 	private EquipmentService service;
 
-	// @GetMapping("/page/{pageNumber}")
-	// public String findPaginated(@PathVariable int pageNumber, Model model) {
-	// Page<Equipment> equipmentListPage = service.findEquipmentPageable(pageNumber,
-	// 2);
-	// model.addAttribute("equipmentList", equipmentListPage);
-	// model.addAttribute("currentPage", pageNumber);
-	// model.addAttribute("totalPages", equipmentListPage.getTotalPages());
-	// model.addAttribute("totalItem", equipmentListPage.getTotalElements());
-	// return "equipments";
-
-	// }
-
-	// @RequestMapping(path = { "/equipments", "/equipments/search", })
-
 	@RequestMapping(path = {"/equipments", "/equipments/search"})
 	public String equipments(Model model, String serialNumber) {
 		//model.addAttribute("equipmentList", service.findBySerialNumber(serialNumber));

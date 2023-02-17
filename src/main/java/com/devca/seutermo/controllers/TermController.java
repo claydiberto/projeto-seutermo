@@ -89,8 +89,7 @@ public class TermController {
 	}
 
 	@GetMapping("/signEmployee/{termId}/{operation}")
-	public String signEmployee(@PathVariable("termId") Long termId, @PathVariable("operation") String operation,
-			Model model) {
+	public String signEmployee(@PathVariable("termId") Long termId, @PathVariable("operation") String operation, Model model) {
 		model.addAttribute("signDTO", new SignDTO(termId, operation));
 		return "sign-employee";
 	}

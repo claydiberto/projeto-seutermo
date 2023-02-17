@@ -2,6 +2,7 @@ package com.devca.seutermo.entities;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
@@ -19,7 +20,7 @@ public class EquipmentTerm {
 	@EmbeddedId
 	private EquipmentTermPK id = new EquipmentTermPK();
 	
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private OperationType statusEquipmentOnTerm;
 	
 	public void setTerm(Term term) {

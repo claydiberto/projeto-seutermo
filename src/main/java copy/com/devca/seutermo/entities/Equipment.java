@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -34,13 +35,13 @@ public class Equipment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private EquipmentType equipmentType;
 	private String fabricator;
 	private String model;
 	private String serialNumber;
 	
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	private EquipmentStatus equipmentStatus = EquipmentStatus.DISPONIVEL;
 	
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "listOfEquipments")

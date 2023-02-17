@@ -22,7 +22,7 @@ public class PeripheralController {
 		model.addAttribute("peripheral", service.getPeripheral());
 		return "peripheral-page";
 	}
-	
+
 	@PostMapping("/savePeripheral")
 	public String save(@ModelAttribute("peripheral") Peripheral peripheral) {		
 		service.save(peripheral);
